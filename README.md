@@ -1,9 +1,9 @@
 # ETF test projects for ELF
-ETF test projects for use in SoapUI to test services against ELF extensions to the INSPIRE Technical Guidance requirements.
+ETF test projects for use in [SoapUI](http://www.soapui.org) to test services against ELF extensions to the INSPIRE Technical Guidance requirements.
 
 The ETF allows for testing geospatial webservices (like WMS, WFS, Atom) and XML files (like GML, GMD) to the requirements of the INSPIRE Technical Guidances for View and Download Services as well as the INSPIRE Data Specifications.
 
-The ETF uses SoapUI [SoapUI](http://www.soapui.org/) for test execution against Web Services and BaseX for tests against XML documents. SoapUI has a GUI and a command line interface. 
+The ETF uses SoapUI [4.6.4](http://dl.eviware.com/list_soapui2.html) for test execution against Web Services and BaseX for tests against XML documents. SoapUI has a GUI and a command line interface. 
 
 Tests for INSPIRE Technical Guidance for View and Download Services are available (here)[https://github.com/Geonovum/etf-test-projects-inspire]. This repository contains additional tests for additional ELF requirements specified in the (ELF specifications)[http://elfproject.eu/documentation/specification].
 
