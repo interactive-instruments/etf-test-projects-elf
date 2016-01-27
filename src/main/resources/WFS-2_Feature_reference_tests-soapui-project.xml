@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project name="WFS-2 Feature reference tests" resourceRoot="${projectDir}" soapui-version="4.6.4" abortOnError="false" runType="SEQUENTIAL" activeEnvironment="etf-sel.modelBridge" id="ede80faa-cbc9-4053-a804-6f4cffab762d" xmlns:con="http://eviware.com/soapui/config"><con:description>Ein generisches Testprojekt, das Tests nach den WFS 1.1.0 Spezifikationen durchführt und sich anhand der Capabilities und DescribeFeatureType konfiguriert. Neben allemeinen Tests der Spezifikationen, werden für jeden oder zufällige FeatureTypes (abhängig vom Parameter testIntensive)  eine Reihe Testfällen ausgeführt. Das Projekt benötigt die XTF-OWSGTL und die XTF-SEL.</con:description><con:settings/><con:testSuite name="TestSetup" id="638212b5-f742-48f2-902d-27f0cb48a4c1">
+<con:soapui-project name="WFS-2 Feature reference tests" resourceRoot="${projectDir}" soapui-version="4.6.4" abortOnError="false" runType="SEQUENTIAL" activeEnvironment="Default" id="ede80faa-cbc9-4053-a804-6f4cffab762d" xmlns:con="http://eviware.com/soapui/config"><con:description>Ein generisches Testprojekt, das Tests nach den WFS 1.1.0 Spezifikationen durchführt und sich anhand der Capabilities und DescribeFeatureType konfiguriert. Neben allemeinen Tests der Spezifikationen, werden für jeden oder zufällige FeatureTypes (abhängig vom Parameter testIntensive)  eine Reihe Testfällen ausgeführt. Das Projekt benötigt die XTF-OWSGTL und die XTF-SEL.</con:description><con:settings/><con:testSuite name="TestSetup" id="638212b5-f742-48f2-902d-27f0cb48a4c1">
     <con:description>Initialiserung der XTF-OWSGTL und Prüfung, ob die Capabilities valide und die Service-Endpoints verfügbar sind. Dieser TestCase ist als Vorlage gedacht und kann in andere Testprojekte kopiert werden.</con:description><con:settings>
       <con:setting id="com.eviware.soapui.impl.wsdl.panels.testcase.JTestRunLog$OptionsForm@errors_only">true</con:setting>
     </con:settings>
@@ -38,119 +38,7 @@ TestSetup.init();
             </con:parameter>
           <con:parameter><con:name>service</con:name><con:value>${#TestSuite#service}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>version</con:name><con:value>${#TestSuite#version}</con:value><con:style>QUERY</con:style></con:parameter></con:parameters>
         </con:config>
-      </con:testStep><con:testStep type="transfer" name="Transfer Capabilities, service and version" id="9be1bb22-e354-40d4-b4a7-13b3358edf2a"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>Capabilities</con:name><con:sourceType>ResponseAsXml</con:sourceType><con:sourceStep>GetCapabilities</con:sourceStep><con:targetType>capabilities</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true"><con:name>service</con:name><con:sourceType>service</con:sourceType><con:sourceStep>#TestSuite#</con:sourceStep><con:targetType>service</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true"><con:name>version</con:name><con:sourceType>version</con:sourceType><con:sourceStep>#TestSuite#</con:sourceStep><con:targetType>version</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="groovy" name="Stop on failure" id="d4019c95-eeb5-438c-a263-5bc26f68c1b1"><con:settings/><con:config><script/></con:config></con:testStep><con:testStep type="groovy" name="Groovy Script" id="ec7fff61-2f2a-45ba-b11c-f429325906c9"><con:settings/><con:config><script><![CDATA[import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import java.awt.Color;
-import org.w3c.dom.Node;
-
-import com.eviware.soapui.impl.support.AbstractHttpRequest
-import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase
-import com.eviware.soapui.impl.wsdl.teststeps.*;
-import com.eviware.soapui.model.iface.MessageExchange
-import com.eviware.soapui.support.XmlHolder
-import com.eviware.soapui.support.types.StringToStringMap
-import com.eviware.soapui.support.types.StringToStringsMap;
-import com.eviware.soapui.impl.rest.RestRequestInterface.RequestMethod;
-
-import de.interactive_instruments.xtf.*;
-import de.interactive_instruments.xtf.exceptions.*;
-
-
-
-	/**
-	 * Set basic authentication headers for all HTTP test requests or just append the
-	 * username and password to all requests, depending on the authentication method.
-	 * Requires that the project variables xtf.authUser, xtf.authPwd and xtf.authMethod are set.
-	 * Possible values for xtf.authMethod: appendCredentials, httpBasic
-	 */
-	public static void updateCredentials(def testRunner) {
-		
-		String authUser = testRunner.testCase.testSuite.project.getPropertyValue('authUser');
-		String authPwd = testRunner.testCase.testSuite.project.getPropertyValue('authPwd');
-		String authMethod = testRunner.testCase.testSuite.project.getPropertyValue('authMethod');
-		
-		for( testSuite in testRunner.testCase.testSuite.project.getTestSuiteList() ) {
-			for( testCase in testSuite.getTestCaseList() ) {
-				for( testStep in testCase.getTestStepList() ) {
-					
-					// Append Credentials
-					if( testStep instanceof HttpTestRequestStep || testStep instanceof RestTestRequestStep) {
-						removeAuthorization(testStep);
-						if(authMethod!=null && authMethod.equals("appendCredentials")) {
-							if(testStep.getHttpRequest().getMethod()==RequestMethod.POST) {
-								// Add username and password to the root element
-								String requestBody = testStep.getProperty("Request").value;
-								if(requestBody!=null && !requestBody.trim().equals("")) {
-									// Xml Parser is useless here, because request may contain properties
-									// which do not validate
-									int tagStart = requestBody.indexOf("<");
-									int tagEnd = requestBody.lastIndexOf(">");
-									String rootElement = requestBody.substring(tagStart, tagEnd);
-									int freePos = rootElement.indexOf(" ");
-									
-									int authUserPos = rootElement.indexOf(" username=");
-									String usernameAttrib=" username=\""+authUser+"\"";
-									if(authUserPos==-1) {
-										rootElement = rootElement.substring(0, freePos)+
-											usernameAttrib+
-											rootElement.substring(freePos, rootElement.length());
-									}else{
-										int usernameEndPos = rootElement.indexOf(" ", authUserPos+7);
-										rootElement = rootElement.substring(0, authUserPos)+
-											usernameAttrib+rootElement.substring(
-												usernameEndPos, rootElement.length());
-									}
-									
-									String pwdAttrib=" password=\""+authPwd+"\"";
-									int authPwdBegPos =  rootElement.indexOf(" password=");
-									if(authPwdBegPos==-1) {
-										rootElement = rootElement.substring(0, freePos)+
-											pwdAttrib+
-											rootElement.substring(freePos, rootElement.length());
-									}else{
-										int pwdEndPos = rootElement.indexOf(" ", authPwdBegPos+7);
-										rootElement = rootElement.substring(0, authPwdBegPos)+
-											pwdAttrib+rootElement.substring(
-												pwdEndPos, rootElement.length());
-									}
-									testStep.getHttpRequest().setRequestContent(
-										rootElement+requestBody.substring(tagEnd, requestBody.length()));
-								}
-							}else{
-								// Just set the GET-Parameters
-								testStep.getHttpRequest().setPropertyValue("username", authUser);
-								testStep.getHttpRequest().setPropertyValue("password", authPwd);
-							}
-						}else if (authMethod!=null && authMethod.equals("basic") 
-                                                            && authUser != null && authUser.size() > 0 
-                                                            && authPwd != null && authPwd.size() > 0 ){
-							// Set Authorization header
-							def headers = new StringToStringsMap();
-							def auth = authUser + ':' + authPwd;
-							def encodedAuth = auth.bytes.encodeBase64().toString();
-							headers.put('Authorization','Basic ' + encodedAuth);
-							testStep.getHttpRequest().setRequestHeaders(headers);
-						}
-					}
-				}
-			}
-		}
-	}
-
-	public static void removeAuthorization(def testStep) {
-		def headers = testStep.getHttpRequest().getRequestHeaders();
-		headers.remove('Authorization');
-		testStep.getHttpRequest().setRequestHeaders(headers);
-
-		if(testStep.getHttpRequest().hasProperty("username")) {
-			testStep.getHttpRequest().removeProperty("username");
-		}
-		if(testStep.getHttpRequest().hasProperty("password")) {
-			testStep.getHttpRequest().removeProperty("password");
-		}
-	}
-	
-	updateCredentials(testRunner);]]></script></con:config></con:testStep><con:properties><con:property><con:name>capabilities</con:name><con:value><![CDATA[<WFS_Capabilities version="2.0.0" xsi:schemaLocation="http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd" xmlns="http://www.opengis.net/wfs/2.0" xmlns:wfs="http://www.opengis.net/wfs/2.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:ogc="http://www.opengis.net/ogc" xmlns:fes="http://www.opengis.net/fes/2.0" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      </con:testStep><con:testStep type="transfer" name="Transfer Capabilities, service and version" id="9be1bb22-e354-40d4-b4a7-13b3358edf2a"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>Capabilities</con:name><con:sourceType>ResponseAsXml</con:sourceType><con:sourceStep>GetCapabilities</con:sourceStep><con:targetType>capabilities</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true"><con:name>service</con:name><con:sourceType>service</con:sourceType><con:sourceStep>#TestSuite#</con:sourceStep><con:targetType>service</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true"><con:name>version</con:name><con:sourceType>version</con:sourceType><con:sourceStep>#TestSuite#</con:sourceStep><con:targetType>version</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="groovy" name="Stop on failure" id="d4019c95-eeb5-438c-a263-5bc26f68c1b1"><con:settings/><con:config><script/></con:config></con:testStep><con:properties><con:property><con:name>capabilities</con:name><con:value><![CDATA[<WFS_Capabilities version="2.0.0" xsi:schemaLocation="http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd" xmlns="http://www.opengis.net/wfs/2.0" xmlns:wfs="http://www.opengis.net/wfs/2.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:ogc="http://www.opengis.net/ogc" xmlns:fes="http://www.opengis.net/fes/2.0" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
    <ows:ServiceIdentification>
       <ows:Title>Download Service for ELF Geographical Names.</ows:Title>
       <ows:Abstract>Download Service for ELF Geographical Names.</ows:Abstract>
@@ -3066,9 +2954,10 @@ while(fit.hasNext()) {
 	def tC = ph.getTestCase(featureType.getName()+" basic reference checks (generated)",
 		ph.getTestSuite("Generated TestCases"));
 	
-	ph.getTestStep(
+	def genTs = ph.getTestStep(
 		"Generate reference requests").clone(tC, 
 			"Generate reference requests");
+	genTs.setDisabled(false);
 
 	try{
 		ph.getTestStep("Request reference TMPL").clone(tC, 
@@ -3083,7 +2972,7 @@ while(fit.hasNext()) {
 
 }
 
-</script></con:config></con:testStep><con:testStep name="Request 1000 Features POST TMPL" type="httprequest" disabled="true">
+</script></con:config></con:testStep><con:testStep name="Request 1000 Features POST TMPL" type="httprequest" disabled="true" id="bafce580-fca2-44a6-84d5-9adbbb8c9799">
         <con:settings/>
         <con:config method="POST" name="Request 1000 Features POST TMPL" timeout="0" xsi:type="con:HttpRequest" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
@@ -3094,7 +2983,7 @@ while(fit.hasNext()) {
           <con:request>&lt;wfs:GetFeature version="2.0.0" outputFormat="${Transfer_Properties#FT.OUTPUTFORMAT}" count="1000" xmlns:wfs="http://www.opengis.net/wfs/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
    &lt;wfs:Query typeNames="${Transfer_Properties#FT.NAME}" ${Transfer_Properties#FT.NAMESPACES}/>
 &lt;/wfs:GetFeature></con:request>
-          <con:assertion type="XPath Match" name="Check relative references" id="fae048da-089d-4063-beac-c90253dec802"><con:configuration><path>&lt;result>
+          <con:assertion type="Simple Schema Validator" name="Simple Schema Validator" id="1d2ddae3-f797-486d-b889-33e7d4686448"><con:configuration><pathToXSD>xsi:schemaLocation</pathToXSD></con:configuration></con:assertion><con:assertion type="OwsExceptionReportAssertion" name="OwsExceptionReportAssertion" id="29e5ab9e-3605-460d-bb8c-a91b5e5808f1"/><con:assertion type="XPath Match" name="Root element is FeatureCollection" id="96a027de-f87c-4326-924e-b3e4ab2e4666"><con:configuration><path>exists(/*:FeatureCollection)</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XQuery Match" name="Check relative references" id="e20d744c-308c-4707-8b7d-f951b9b3354d"><con:configuration><path>&lt;result>
 {
 for $reference in //@*:href
 return if (
@@ -3103,7 +2992,7 @@ starts-with($reference, "#") and exists(//.[@*:id=substring-after($reference,'#'
 then ""
 else &lt;error>Invalid reference: {data($reference) } does not start with '#' or not found in document&lt;/error>
 }
-&lt;/result></path><content/><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="Simple Schema Validator" name="Simple Schema Validator" id="1d2ddae3-f797-486d-b889-33e7d4686448"><con:configuration><pathToXSD>xsi:schemaLocation</pathToXSD></con:configuration></con:assertion><con:assertion type="OwsExceptionReportAssertion" name="OwsExceptionReportAssertion" id="29e5ab9e-3605-460d-bb8c-a91b5e5808f1"/><con:assertion type="XPath Match" name="Root element is WFS_Capabilities" id="96a027de-f87c-4326-924e-b3e4ab2e4666"><con:configuration><path>exists(/*:WFS_Capabilities)</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+&lt;/result></path><content>&lt;result>&lt;/result></content><allowWildcards>false</allowWildcards></con:configuration></con:assertion><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
           <con:jmsPropertyConfig/>
           <con:parameters>
             
@@ -3120,7 +3009,15 @@ import de.interactive_instruments.xtf.*;
 
 ProjectHelper ph = new ProjectHelper();
 
-def holder = ph.getTestStepResult('Request 1000 Features (generated)');
+def tsTempl = 'Request 1000 Features (generated)'
+def holder
+try{
+	holder = ph.getTestStepResultAsXML(tsTempl);
+}catch(Exception e) {
+	ph.getTestStep(tsTempl).getTestRequest().setDiscardResponse(false);
+	holder = ph.runTestStep(tsTempl);
+	ph.getTestStep(tsTempl).getTestRequest().setDiscardResponse(true);
+}
 
 def references = new HashSet();
 
@@ -3150,7 +3047,7 @@ for (reference in references) {
           <con:encoding>UTF-8</con:encoding>
           <con:endpoint>${Transfer_Properties#REFERENCE}</con:endpoint>
           <con:request/>
-          <con:assertion type="Response SLA Assertion" name="Respond in 60 seconds" id="f4835519-c036-4bdb-a8fa-641c29d2c8ff"><con:configuration><SLA>60000</SLA></con:configuration></con:assertion><con:assertion type="XPath Match" name="Expect no HTML root element" id="fba8f343-cd90-4968-96b3-37f36bd6a864"><con:configuration><path>exists(/*:ExceptionReport)</path><content>false</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:assertion type="Response SLA Assertion" name="Respond in 60 seconds" id="f4835519-c036-4bdb-a8fa-641c29d2c8ff"><con:configuration><SLA>60000</SLA></con:configuration></con:assertion><con:assertion type="XPath Match" name="Expect no Exception" id="fba8f343-cd90-4968-96b3-37f36bd6a864"><con:configuration><path>exists(/*:ExceptionReport)</path><content>false</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
           <con:jmsPropertyConfig/>
           <con:parameters>
             
@@ -3801,4 +3698,4 @@ while(fit.hasNext()) {
    &lt;wfs:Query typeNames="${Transfer_Properties#FT.NAME}" ${Transfer_Properties#FT.NAMESPACES}/>
 &lt;/wfs:GetFeature></con:request><con:assertion type="Simple Schema Validator" name="Simple Schema Validator" id="e2b29c62-8cef-41cc-ba6d-fffe57ee39ae"><con:configuration><pathToXSD>xsi:schemaLocation</pathToXSD></con:configuration></con:assertion><con:assertion type="OwsExceptionReportAssertion" name="OwsExceptionReportAssertion" id="2c49bf78-9171-4984-b4f2-b55c42c61c36"/><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="groovy" name="Generate reference requests" id="f193beac-d2f7-4235-b832-ce70ec437d59"><con:settings/><con:config><script/></con:config></con:testStep><con:testStep type="httprequest" name="Request reference" disabled="true" id="e28a61fb-8408-432c-9423-367f9f519a9f"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="Request reference" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#endpt.GetFeature}</con:endpoint><con:request>&lt;wfs:GetFeature version="2.0.0" outputFormat="${Transfer_Properties#FT.OUTPUTFORMAT}" count="1000" xmlns:wfs="http://www.opengis.net/wfs/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
    &lt;wfs:Query typeNames="${Transfer_Properties#FT.NAME}" ${Transfer_Properties#FT.NAMESPACES}/>
-&lt;/wfs:GetFeature></con:request><con:assertion type="Simple Schema Validator" name="Simple Schema Validator" id="e2b29c62-8cef-41cc-ba6d-fffe57ee39ae"><con:configuration><pathToXSD>xsi:schemaLocation</pathToXSD></con:configuration></con:assertion><con:assertion type="OwsExceptionReportAssertion" name="OwsExceptionReportAssertion" id="2c49bf78-9171-4984-b4f2-b55c42c61c36"/><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:properties><con:property><con:name>qaf.ShortDescription</con:name><con:value/></con:property><con:property><con:name>qaf.Author</con:name><con:value>herrmann</con:value></con:property><con:property><con:name>qaf.CreationDate</con:name><con:value>2014-01-13T12:24:44.142+01:00</con:value></con:property><con:property><con:name>qaf.Version</con:name><con:value>1.0.0</con:value></con:property><con:property><con:name>qaf.AssociatedRequirements</con:name><con:value/></con:property><con:property><con:name>qaf.ExpectedResults</con:name><con:value/></con:property><con:property><con:name>qaf.Status</con:name><con:value>IMPLEMENTED</con:value></con:property><con:property><con:name>qaf.LastUpdateDate</con:name><con:value>2014-01-13T14:10:42.874+01:00</con:value></con:property></con:properties><con:reportParameters/></con:testCase><con:properties/><con:reportParameters/></con:testSuite><con:testSuite name="Generated TestCases" id="d72a1211-7847-47d5-be24-7baef4909488"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:properties/></con:testSuite><con:requirements/><con:properties><con:property><con:name>serviceEndpoint</con:name><con:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">http://wfs.geonorge.no/skwms1/wfs.elf-gn?SERVICE=WFS&amp;amp;VERSION=2.0.0&amp;amp;REQUEST=GetCapabilities</con:value></con:property><con:property><con:name>basicAuthPwd</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>basicAuthUser</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>expectSupportedOperations</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>endpt.DescribeFeatureType</con:name><con:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">http://wfs.geonorge.no/skwms1/wfs.elf-gn?</con:value></con:property><con:property><con:name>endpt.GetFeature</con:name><con:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">http://wfs.geonorge.no/skwms1/wfs.elf-gn?</con:value></con:property><con:property><con:name>endpt.GetMap</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>endpt.GetFeatureInfo</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>testIntensive</con:name><con:value>true</con:value></con:property><con:property><con:name>xtf.serviceEndpoint</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>xtf.testIntensive</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>xtf.authUser</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>xtf.authPwd</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>xtf.authMethod</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>authUser</con:name><con:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>authPwd</con:name><con:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>authMethod</con:name><con:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">basic</con:value></con:property><con:property><con:name>checkSupportOf.featureTypes</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>FeatureTypeNames</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property></con:properties><con:wssContainer/><con:databaseConnectionContainer/><con:reporting><con:xmlTemplates/><con:parameters/></con:reporting><con:beforeRunScript/><con:sensitiveInformation/></con:soapui-project>
+&lt;/wfs:GetFeature></con:request><con:assertion type="Simple Schema Validator" name="Simple Schema Validator" id="e2b29c62-8cef-41cc-ba6d-fffe57ee39ae"><con:configuration><pathToXSD>xsi:schemaLocation</pathToXSD></con:configuration></con:assertion><con:assertion type="OwsExceptionReportAssertion" name="OwsExceptionReportAssertion" id="2c49bf78-9171-4984-b4f2-b55c42c61c36"/><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:properties><con:property><con:name>qaf.ShortDescription</con:name><con:value/></con:property><con:property><con:name>qaf.Author</con:name><con:value>herrmann</con:value></con:property><con:property><con:name>qaf.CreationDate</con:name><con:value>2014-01-13T12:24:44.142+01:00</con:value></con:property><con:property><con:name>qaf.Version</con:name><con:value>1.0.0</con:value></con:property><con:property><con:name>qaf.AssociatedRequirements</con:name><con:value/></con:property><con:property><con:name>qaf.ExpectedResults</con:name><con:value/></con:property><con:property><con:name>qaf.Status</con:name><con:value>IMPLEMENTED</con:value></con:property><con:property><con:name>qaf.LastUpdateDate</con:name><con:value>2014-01-13T14:10:42.874+01:00</con:value></con:property></con:properties><con:reportParameters/></con:testCase><con:properties/><con:reportParameters/></con:testSuite><con:testSuite name="Generated TestCases" id="d72a1211-7847-47d5-be24-7baef4909488"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:properties/></con:testSuite><con:requirements/><con:properties><con:property><con:name>serviceEndpoint</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>basicAuthPwd</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>basicAuthUser</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>expectSupportedOperations</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>endpt.DescribeFeatureType</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>endpt.GetFeature</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>endpt.GetMap</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>endpt.GetFeatureInfo</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>testIntensive</con:name><con:value>true</con:value></con:property><con:property><con:name>xtf.serviceEndpoint</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>xtf.testIntensive</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>xtf.authUser</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>xtf.authPwd</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>xtf.authMethod</con:name><con:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">basic</con:value></con:property><con:property><con:name>authUser</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>authPwd</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>authMethod</con:name><con:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">basic</con:value></con:property><con:property><con:name>checkSupportOf.featureTypes</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>FeatureTypeNames</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property></con:properties><con:wssContainer/><con:databaseConnectionContainer/><con:reporting><con:xmlTemplates/><con:parameters/></con:reporting><con:beforeRunScript/><con:sensitiveInformation/></con:soapui-project>
