@@ -1,0 +1,2 @@
+II-REQ##REQ-01__Name=Valid Feature references
+II-REQ##REQ-01__Description=For all references to another features in the ELF data the URI has to be a WFS 2.0 GetFeature request. In a pre-defined dataset, a link may also be a relative XPointer (ie. "#<gml-id-of-target-feature>", if the target feature is in the same XML file).
