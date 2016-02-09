@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project name="WFS 2.0.0 (additional ELF tests)" resourceRoot="${projectDir}" soapui-version="4.6.4" abortOnError="false" runType="SEQUENTIAL" activeEnvironment="Default" id="ede80faa-cbc9-4053-a804-6f4cffab762d" xmlns:con="http://eviware.com/soapui/config"><con:description>The tests checks the GML encoding for each feaure type provided by the WFS for invalid, i.e. not resolvable, references (in xlink:href and xsi:schemaLocation)</con:description><con:settings/><con:testSuite name="TestSetup" id="638212b5-f742-48f2-902d-27f0cb48a4c1">
+<con:soapui-project name="WFS 2.0.0 (additional ELF tests)" resourceRoot="${projectDir}" soapui-version="4.6.4" abortOnError="false" runType="SEQUENTIAL" activeEnvironment="etf-sel.modelBridge" id="ede80faa-cbc9-4053-a804-6f4cffab762d" xmlns:con="http://eviware.com/soapui/config"><con:description>The tests checks the GML encoding for each feaure type provided by the WFS for invalid, i.e. not resolvable, references (in xlink:href and xsi:schemaLocation)</con:description><con:settings/><con:testSuite name="TestSetup" id="638212b5-f742-48f2-902d-27f0cb48a4c1">
     <con:description>Request and parse the capabilities of the service and configure test cases. Requires the etf-sui-owsgtl test library.</con:description><con:settings>
       <con:setting id="com.eviware.soapui.impl.wsdl.panels.testcase.JTestRunLog$OptionsForm@errors_only">true</con:setting>
     </con:settings>
@@ -38,81 +38,166 @@ TestSetup.init();
             </con:parameter>
           <con:parameter><con:name>service</con:name><con:value>${#TestSuite#service}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>version</con:name><con:value>${#TestSuite#version}</con:value><con:style>QUERY</con:style></con:parameter></con:parameters>
         </con:config>
-      </con:testStep><con:testStep type="transfer" name="Transfer Capabilities, service and version" id="9be1bb22-e354-40d4-b4a7-13b3358edf2a"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>Capabilities</con:name><con:sourceType>ResponseAsXml</con:sourceType><con:sourceStep>GetCapabilities</con:sourceStep><con:targetType>capabilities</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true"><con:name>service</con:name><con:sourceType>service</con:sourceType><con:sourceStep>#TestSuite#</con:sourceStep><con:targetType>service</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true"><con:name>version</con:name><con:sourceType>version</con:sourceType><con:sourceStep>#TestSuite#</con:sourceStep><con:targetType>version</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers></con:config></con:testStep><con:properties><con:property><con:name>capabilities</con:name><con:value><![CDATA[<WFS_Capabilities version="2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:fes="http://www.opengis.net/fes/2.0" xmlns="http://www.opengis.net/wfs/2.0">
+      </con:testStep><con:testStep type="transfer" name="Transfer Capabilities, service and version" id="9be1bb22-e354-40d4-b4a7-13b3358edf2a"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>Capabilities</con:name><con:sourceType>ResponseAsXml</con:sourceType><con:sourceStep>GetCapabilities</con:sourceStep><con:targetType>capabilities</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true"><con:name>service</con:name><con:sourceType>service</con:sourceType><con:sourceStep>#TestSuite#</con:sourceStep><con:targetType>service</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true"><con:name>version</con:name><con:sourceType>version</con:sourceType><con:sourceStep>#TestSuite#</con:sourceStep><con:targetType>version</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers></con:config></con:testStep><con:properties><con:property><con:name>capabilities</con:name><con:value><![CDATA[<wfs:WFS_Capabilities xsi:schemaLocation="http://www.opengis.net/wfs/2.0 http://services.interactive-instruments.de/cite2013wfs/simpledemo/schema/ogc/wfs/2.0/wfs.xsd" version="2.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wfs="http://www.opengis.net/wfs/2.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:fes="http://www.opengis.net/fes/2.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
    <ows:ServiceIdentification>
-      <ows:Title>CZE INSPIRE Download Service - Cadastral Parcels</ows:Title>
-      <ows:Abstract>WFS download service for the theme Cadastral Parcels (CP) is a public download service for provision of data from the Information System of the Cadastre of Real Estates (ISKN) that makes possible repetitive download of these data in files by cadastral units and an online access to these data using the WFS 2.0.0. technology. The download service provides harmonised data from the theme Cadastral Parcels (CP) in GML format according to INSPIRE. The service is available only for cadastral units with a digital map (DKM/KMD) – effective for CP.CadastralParcel and CP.CadastralBoundary layers. The layer CP.CadastralZoning is available for the whole territory of the Czech Republic. The service fulfils technical guidance for INSPIRE download services version 3.0.1 and simultaneously fulfils the OGC WFS 2.0.0 standard.</ows:Abstract>
-      <ows:ServiceType>OGC WFS</ows:ServiceType>
+      <ows:Title>SimpleDemo WFS</ows:Title>
+      <ows:Abstract>SimpleDemo WFS by XtraServer</ows:Abstract>
+      <ows:Keywords>
+         <ows:Keyword>XtraServer Demo</ows:Keyword>
+         <ows:Keyword>WFS</ows:Keyword>
+         <ows:Keyword>SimpleDemo</ows:Keyword>
+      </ows:Keywords>
+      <ows:ServiceType>WFS</ows:ServiceType>
+      <ows:ServiceTypeVersion>1.0.0</ows:ServiceTypeVersion>
+      <ows:ServiceTypeVersion>1.1.0</ows:ServiceTypeVersion>
       <ows:ServiceTypeVersion>2.0.0</ows:ServiceTypeVersion>
+      <ows:Fees>The use of this service is restricted. Please contact us.</ows:Fees>
+      <ows:AccessConstraints>The use of this service is restricted. Please contact us.</ows:AccessConstraints>
    </ows:ServiceIdentification>
    <ows:ServiceProvider>
-      <ows:ProviderName>Czech Office for Surveying, Mapping and Cadastre</ows:ProviderName>
-      <ows:ProviderSite xlink:type="simple" xlink:href="www.cuzk.cz"/>
+      <ows:ProviderName>interactive instruments GmbH</ows:ProviderName>
+      <ows:ProviderSite/>
       <ows:ServiceContact>
+         <ows:IndividualName>XtraServer SimpleDemo Team</ows:IndividualName>
+         <ows:PositionName>Team</ows:PositionName>
          <ows:ContactInfo>
             <ows:Phone>
-               <ows:Voice>+420 284 044 455</ows:Voice>
-               <ows:Facsimile>+420 284 041 557</ows:Facsimile>
+               <ows:Voice>+49 228 9141070</ows:Voice>
+               <ows:Facsimile>+49 228 9141090</ows:Facsimile>
             </ows:Phone>
             <ows:Address>
-               <ows:DeliveryPoint>Pod Sídlištěm 1800/9</ows:DeliveryPoint>
-               <ows:City>Praha 8</ows:City>
-               <ows:AdministrativeArea>Kobylisy</ows:AdministrativeArea>
-               <ows:PostalCode>182 11</ows:PostalCode>
-               <ows:Country>Czech Republic</ows:Country>
-               <ows:ElectronicMailAddress>cuzk.helpdesk@cuzk.cz</ows:ElectronicMailAddress>
+               <ows:City>Bonn</ows:City>
+               <ows:AdministrativeArea>NRW</ows:AdministrativeArea>
+               <ows:PostalCode>53115</ows:PostalCode>
+               <ows:Country>DE</ows:Country>
+               <ows:ElectronicMailAddress>xtraserver@interactive-instruments.de</ows:ElectronicMailAddress>
             </ows:Address>
-            <ows:OnlineResource xlink:type="simple" xlink:href="http://services.cuzk.cz/doc/inspire-cp-download.pdf"/>
-            <ows:HoursOfService>Mo-Fr 7:00 AM - 5:00 PM CET</ows:HoursOfService>
+            <ows:OnlineResource xlink:href="http://www.interactive-instruments.de"/>
+            <ows:HoursOfService>0900 - 1800 GMT+1, Mon - Fri</ows:HoursOfService>
          </ows:ContactInfo>
+         <ows:Role>PointOfContact</ows:Role>
       </ows:ServiceContact>
    </ows:ServiceProvider>
    <ows:OperationsMetadata>
       <ows:Operation name="GetCapabilities">
          <ows:DCP>
             <ows:HTTP>
-               <ows:Get xlink:type="simple" xlink:href="http://services.cuzk.cz/wfs/inspire-cp-wfs.asp?"/>
-               <ows:Post xlink:type="simple" xlink:href="http://services.cuzk.cz/wfs/inspire-cp-wfs.asp?"/>
+               <ows:Get xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs?"/>
+               <ows:Post xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs"/>
             </ows:HTTP>
          </ows:DCP>
+         <ows:Parameter name="AcceptVersions">
+            <ows:AllowedValues>
+               <ows:Value>1.0.0</ows:Value>
+               <ows:Value>1.1.0</ows:Value>
+               <ows:Value>2.0.0</ows:Value>
+            </ows:AllowedValues>
+         </ows:Parameter>
+         <ows:Parameter name="AcceptFormats">
+            <ows:AllowedValues>
+               <ows:Value>text/xml</ows:Value>
+            </ows:AllowedValues>
+         </ows:Parameter>
+         <ows:Parameter name="Sections">
+            <ows:AllowedValues>
+               <ows:Value>ServiceIdentification</ows:Value>
+               <ows:Value>ServiceProvider</ows:Value>
+               <ows:Value>OperationsMetadata</ows:Value>
+               <ows:Value>FeatureTypeList</ows:Value>
+               <ows:Value>Filter_Capabilities</ows:Value>
+            </ows:AllowedValues>
+         </ows:Parameter>
       </ows:Operation>
       <ows:Operation name="DescribeFeatureType">
          <ows:DCP>
             <ows:HTTP>
-               <ows:Get xlink:type="simple" xlink:href="http://services.cuzk.cz/wfs/inspire-cp-wfs.asp?"/>
-               <ows:Post xlink:type="simple" xlink:href="http://services.cuzk.cz/wfs/inspire-cp-wfs.asp?"/>
+               <ows:Get xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs?"/>
+               <ows:Post xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs"/>
             </ows:HTTP>
          </ows:DCP>
+         <ows:Parameter name="outputFormat">
+            <ows:AllowedValues>
+               <ows:Value>text/xml; subtype=gml/2.1.2</ows:Value>
+               <ows:Value>application/gml+xml; version=2.1</ows:Value>
+               <ows:Value>text/xml; subtype=gml/3.1.1</ows:Value>
+               <ows:Value>application/gml+xml; version=3.1</ows:Value>
+               <ows:Value>text/xml; subtype=gml/3.2.1</ows:Value>
+               <ows:Value>application/gml+xml; version=3.2</ows:Value>
+            </ows:AllowedValues>
+         </ows:Parameter>
+      </ows:Operation>
+      <ows:Operation name="GetFeature">
+         <ows:DCP>
+            <ows:HTTP>
+               <ows:Get xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs?"/>
+               <ows:Post xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs"/>
+            </ows:HTTP>
+         </ows:DCP>
+         <ows:Parameter name="outputFormat">
+            <ows:AllowedValues>
+               <ows:Value>text/xml; subtype=gml/2.1.2</ows:Value>
+               <ows:Value>application/gml+xml; version=2.1</ows:Value>
+               <ows:Value>text/xml; subtype=gml/3.1.1</ows:Value>
+               <ows:Value>application/gml+xml; version=3.1</ows:Value>
+               <ows:Value>text/xml; subtype=gml/3.2.1</ows:Value>
+               <ows:Value>application/gml+xml; version=3.2</ows:Value>
+            </ows:AllowedValues>
+         </ows:Parameter>
+      </ows:Operation>
+      <ows:Operation name="GetPropertyValue">
+         <ows:DCP>
+            <ows:HTTP>
+               <ows:Get xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs?"/>
+               <ows:Post xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs"/>
+            </ows:HTTP>
+         </ows:DCP>
+         <ows:Parameter name="outputFormat">
+            <ows:AllowedValues>
+               <ows:Value>text/xml; subtype=gml/2.1.2</ows:Value>
+               <ows:Value>application/gml+xml; version=2.1</ows:Value>
+               <ows:Value>text/xml; subtype=gml/3.1.1</ows:Value>
+               <ows:Value>application/gml+xml; version=3.1</ows:Value>
+               <ows:Value>text/xml; subtype=gml/3.2.1</ows:Value>
+               <ows:Value>application/gml+xml; version=3.2</ows:Value>
+            </ows:AllowedValues>
+         </ows:Parameter>
       </ows:Operation>
       <ows:Operation name="ListStoredQueries">
          <ows:DCP>
             <ows:HTTP>
-               <ows:Get xlink:type="simple" xlink:href="http://services.cuzk.cz/wfs/inspire-cp-wfs.asp?"/>
-               <ows:Post xlink:type="simple" xlink:href="http://services.cuzk.cz/wfs/inspire-cp-wfs.asp?"/>
+               <ows:Get xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs?"/>
+               <ows:Post xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs"/>
             </ows:HTTP>
          </ows:DCP>
       </ows:Operation>
       <ows:Operation name="DescribeStoredQueries">
          <ows:DCP>
             <ows:HTTP>
-               <ows:Get xlink:type="simple" xlink:href="http://services.cuzk.cz/wfs/inspire-cp-wfs.asp?"/>
-               <ows:Post xlink:type="simple" xlink:href="http://services.cuzk.cz/wfs/inspire-cp-wfs.asp?"/>
+               <ows:Get xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs?"/>
+               <ows:Post xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs"/>
             </ows:HTTP>
          </ows:DCP>
       </ows:Operation>
-      <ows:Operation name="GetFeature">
-         <ows:DCP>
-            <ows:HTTP>
-               <ows:Get xlink:type="simple" xlink:href="http://services.cuzk.cz/wfs/inspire-cp-wfs.asp?"/>
-               <ows:Post xlink:type="simple" xlink:href="http://services.cuzk.cz/wfs/inspire-cp-wfs.asp?"/>
-            </ows:HTTP>
-         </ows:DCP>
-      </ows:Operation>
-      <ows:Parameter name="AcceptVersions">
+      <ows:Parameter name="version">
          <ows:AllowedValues>
             <ows:Value>2.0.0</ows:Value>
+            <ows:Value>1.1.0</ows:Value>
+            <ows:Value>1.0.0</ows:Value>
          </ows:AllowedValues>
       </ows:Parameter>
+      <ows:Parameter name="srsName">
+         <ows:AllowedValues>
+            <ows:Value>urn:ogc:def:crs:EPSG::25833</ows:Value>
+            <ows:Value>urn:ogc:def:crs:EPSG::3034</ows:Value>
+            <ows:Value>urn:ogc:def:crs:EPSG::3857</ows:Value>
+            <ows:Value>urn:ogc:def:crs:EPSG::4258</ows:Value>
+            <ows:Value>urn:ogc:def:crs:EPSG::4326</ows:Value>
+         </ows:AllowedValues>
+      </ows:Parameter>
+      <ows:Constraint name="ImplementsSimpleWFS">
+         <ows:NoValues/>
+         <ows:DefaultValue>TRUE</ows:DefaultValue>
+      </ows:Constraint>
       <ows:Constraint name="ImplementsBasicWFS">
          <ows:NoValues/>
          <ows:DefaultValue>TRUE</ows:DefaultValue>
@@ -139,7 +224,7 @@ TestSetup.init();
       </ows:Constraint>
       <ows:Constraint name="ImplementsInheritance">
          <ows:NoValues/>
-         <ows:DefaultValue>FALSE</ows:DefaultValue>
+         <ows:DefaultValue>TRUE</ows:DefaultValue>
       </ows:Constraint>
       <ows:Constraint name="ImplementsRemoteResolve">
          <ows:NoValues/>
@@ -169,127 +254,79 @@ TestSetup.init();
          <ows:NoValues/>
          <ows:DefaultValue>FALSE</ows:DefaultValue>
       </ows:Constraint>
-      <ows:ExtendedCapabilities>
-         <inspire_dls:ExtendedCapabilities xmlns:inspire_dls="http://inspire.ec.europa.eu/schemas/inspire_dls/1.0">
-            <inspire_common:MetadataUrl xmlns:inspire_common="http://inspire.ec.europa.eu/schemas/common/1.0">
-               <inspire_common:URL>http://geoportal.cuzk.cz/getHTML.aspx?mode=Metadata&amp;fnc=getRecord&amp;identifierid=CZ-CUZK-WFS-CP</inspire_common:URL>
-            </inspire_common:MetadataUrl>
-            <inspire_common:SupportedLanguages xmlns:inspire_common="http://inspire.ec.europa.eu/schemas/common/1.0">
-               <inspire_common:DefaultLanguage>
-                  <inspire_common:Language>eng</inspire_common:Language>
-               </inspire_common:DefaultLanguage>
-            </inspire_common:SupportedLanguages>
-            <inspire_common:ResponseLanguage xmlns:inspire_common="http://inspire.ec.europa.eu/schemas/common/1.0">
-               <inspire_common:Language>eng</inspire_common:Language>
-            </inspire_common:ResponseLanguage>
-            <inspire_dls:SpatialDataSetIdentifier>
-               <inspire_common:Code xmlns:inspire_common="http://inspire.ec.europa.eu/schemas/common/1.0">CZ-00025712-CUZK_CP</inspire_common:Code>
-               <inspire_common:Namespace xmlns:inspire_common="http://inspire.ec.europa.eu/schemas/common/1.0">ČÚZK</inspire_common:Namespace>
-            </inspire_dls:SpatialDataSetIdentifier>
-         </inspire_dls:ExtendedCapabilities>
-      </ows:ExtendedCapabilities>
+      <ows:Constraint name="AutomaticDataLocking">
+         <ows:NoValues/>
+         <ows:DefaultValue>TRUE</ows:DefaultValue>
+      </ows:Constraint>
+      <ows:Constraint name="PreservesSiblingOrder">
+         <ows:NoValues/>
+         <ows:DefaultValue>TRUE</ows:DefaultValue>
+      </ows:Constraint>
+      <ows:Constraint name="ResolveLocalScope">
+         <ows:NoValues/>
+         <ows:DefaultValue>*</ows:DefaultValue>
+      </ows:Constraint>
+      <ows:Constraint name="QueryExpressions">
+         <ows:AllowedValues>
+            <ows:Value>wfs:Query</ows:Value>
+            <ows:Value>wfs:StoredQuery</ows:Value>
+         </ows:AllowedValues>
+      </ows:Constraint>
    </ows:OperationsMetadata>
-   <FeatureTypeList>
-      <FeatureType xmlns:CP="urn:x-inspire:specification:gmlas:CadastralParcels:3.0">
-         <Name>CP:CadastralBoundary</Name>
-         <Title>Cadastral Parcel Boundaries</Title>
-         <Abstract>The data correspond with the INSPIRE Directive for the thema Cadastral Parcels (CP). It originates in the cadastral map that is a binding national map series at large scale, contains points of horizontal geodetic control, planimetric component and map lettering and can be maintained in the form of digital map, analogue map or digitized map. The data published in this feature type contain only cadastral boundaries from the territory where the digital map occures. More in the Cadastral Law 344/1992 Coll., Cadastral Public Note No. 26/2007 Coll. as ammended and INSPIRE Data Specification on Cadastral Parcels v 3.0.1.</Abstract>
-         <ows:Keywords>
-            <ows:Keyword>Cadastral Parcel Boundaries</ows:Keyword>
-         </ows:Keywords>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::5514</DefaultCRS>
-         <OtherCRS>ESRI:102067</OtherCRS>
-         <OtherCRS>ESRI:102066</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::900913</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::28403</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::28404</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::5221</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::5224</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::5225</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::2065</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:OGC::CRS84</OtherCRS>
-         <OtherCRS>CRS:84</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-         </OutputFormats>
+   <wfs:FeatureTypeList>
+      <wfs:FeatureType xmlns:ci="http://www.interactive-instruments.de/namespaces/demo/cities/4.0/cities">
+         <wfs:Name>ci:City</wfs:Name>
+         <wfs:Title/>
+         <wfs:DefaultCRS>urn:ogc:def:crs:EPSG::4326</wfs:DefaultCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::25833</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::3034</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::3857</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::4258</wfs:OtherCRS>
          <ows:WGS84BoundingBox>
-            <ows:LowerCorner>10 43</ows:LowerCorner>
-            <ows:UpperCorner>22 55</ows:UpperCorner>
+            <ows:LowerCorner>5 46</ows:LowerCorner>
+            <ows:UpperCorner>16 54</ows:UpperCorner>
          </ows:WGS84BoundingBox>
-         <MetadataURL xlink:type="simple" xlink:href="http://geoportal.cuzk.cz/getHTML.aspx?mode=Metadata&amp;fnc=getRecord&amp;identifierid=CZ-CUZK-CP"/>
-      </FeatureType>
-      <FeatureType xmlns:CP="urn:x-inspire:specification:gmlas:CadastralParcels:3.0">
-         <Name>CP:CadastralParcel</Name>
-         <Title>Cadastral parcel polygons</Title>
-         <Abstract>The data correspond with the INSPIRE Directive for the thema Cadastral Parcels (CP). It originates in the cadastral map that is a binding national map series at large scale, contains points of horizontal geodetic control, planimetric component and map lettering and can be maintained in the form of digital map, analogue map or digitized map. The data published in this feature type contain only parcels from the territory where the digital map occures. More in the Cadastral Law 344/1992 Coll., Cadastral Public Note No. 26/2007 Coll. as ammended and INSPIRE Data Specification on Cadastral Parcels v 3.0.1.</Abstract>
-         <ows:Keywords>
-            <ows:Keyword>Cadastral parcel polygons</ows:Keyword>
-         </ows:Keywords>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::5514</DefaultCRS>
-         <OtherCRS>ESRI:102067</OtherCRS>
-         <OtherCRS>ESRI:102066</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::900913</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::28403</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::28404</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::5221</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::5224</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::5225</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::2065</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:OGC::CRS84</OtherCRS>
-         <OtherCRS>CRS:84</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-         </OutputFormats>
+      </wfs:FeatureType>
+      <wfs:FeatureType xmlns:ci="http://www.interactive-instruments.de/namespaces/demo/cities/4.0/cities">
+         <wfs:Name>ci:District</wfs:Name>
+         <wfs:Title/>
+         <wfs:DefaultCRS>urn:ogc:def:crs:EPSG::4326</wfs:DefaultCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::25833</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::3034</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::3857</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::4258</wfs:OtherCRS>
          <ows:WGS84BoundingBox>
-            <ows:LowerCorner>10 43</ows:LowerCorner>
-            <ows:UpperCorner>22 55</ows:UpperCorner>
+            <ows:LowerCorner>5 46</ows:LowerCorner>
+            <ows:UpperCorner>16 54</ows:UpperCorner>
          </ows:WGS84BoundingBox>
-         <MetadataURL xlink:type="simple" xlink:href="http://geoportal.cuzk.cz/getHTML.aspx?mode=Metadata&amp;fnc=getRecord&amp;identifierid=CZ-CUZK-CP"/>
-      </FeatureType>
-      <FeatureType xmlns:CP="urn:x-inspire:specification:gmlas:CadastralParcels:3.0">
-         <Name>CP:CadastralZoning</Name>
-         <Title>Cadastral Zoning polygons</Title>
-         <Abstract>The data correspond with the INSPIRE Directive for the thema Cadastral Parcels (CP). It originates in the cadastral map that is a binding national map series at large scale, contains points of horizontal geodetic control, planimetric component and map lettering and can be maintained in the form of digital map, analogue map or digitized map. The data published in this Feature type contain only cadastral districts (for the whole Czech Republic). More in the Cadastral Law 344/1992 Coll., Cadastral Public Note No. 26/2007 Coll. as ammended and INSPIRE Data Specification on Cadastral Parcels v 3.0.1.</Abstract>
-         <ows:Keywords>
-            <ows:Keyword>Cadastral Zoning polygons</ows:Keyword>
-         </ows:Keywords>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::5514</DefaultCRS>
-         <OtherCRS>ESRI:102067</OtherCRS>
-         <OtherCRS>ESRI:102066</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::900913</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::28403</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::28404</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::5221</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::5224</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::5225</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::2065</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:OGC::CRS84</OtherCRS>
-         <OtherCRS>CRS:84</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-         </OutputFormats>
+      </wfs:FeatureType>
+      <wfs:FeatureType xmlns:ci="http://www.interactive-instruments.de/namespaces/demo/cities/4.0/cities">
+         <wfs:Name>ci:River</wfs:Name>
+         <wfs:Title/>
+         <wfs:DefaultCRS>urn:ogc:def:crs:EPSG::4326</wfs:DefaultCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::25833</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::3034</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::3857</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::4258</wfs:OtherCRS>
          <ows:WGS84BoundingBox>
-            <ows:LowerCorner>10 43</ows:LowerCorner>
-            <ows:UpperCorner>22 55</ows:UpperCorner>
+            <ows:LowerCorner>5 46</ows:LowerCorner>
+            <ows:UpperCorner>16 54</ows:UpperCorner>
          </ows:WGS84BoundingBox>
-         <MetadataURL xlink:type="simple" xlink:href="http://geoportal.cuzk.cz/getHTML.aspx?mode=Metadata&amp;fnc=getRecord&amp;identifierid=CZ-CUZK-CP"/>
-      </FeatureType>
-   </FeatureTypeList>
+      </wfs:FeatureType>
+      <wfs:FeatureType xmlns:ci="http://www.interactive-instruments.de/namespaces/demo/cities/4.0/cities">
+         <wfs:Name>ci:State</wfs:Name>
+         <wfs:Title/>
+         <wfs:DefaultCRS>urn:ogc:def:crs:EPSG::4326</wfs:DefaultCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::25833</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::3034</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::3857</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::4258</wfs:OtherCRS>
+         <ows:WGS84BoundingBox>
+            <ows:LowerCorner>5 46</ows:LowerCorner>
+            <ows:UpperCorner>16 54</ows:UpperCorner>
+         </ows:WGS84BoundingBox>
+      </wfs:FeatureType>
+   </wfs:FeatureTypeList>
    <fes:Filter_Capabilities>
       <fes:Conformance>
          <fes:Constraint name="ImplementsQuery">
@@ -302,7 +339,11 @@ TestSetup.init();
          </fes:Constraint>
          <fes:Constraint name="ImplementsFunctions">
             <ows:NoValues/>
-            <ows:DefaultValue>FALSE</ows:DefaultValue>
+            <ows:DefaultValue>TRUE</ows:DefaultValue>
+         </fes:Constraint>
+         <fes:Constraint name="ImplementsResourceId">
+            <ows:NoValues/>
+            <ows:DefaultValue>TRUE</ows:DefaultValue>
          </fes:Constraint>
          <fes:Constraint name="ImplementsMinStandardFilter">
             <ows:NoValues/>
@@ -318,15 +359,15 @@ TestSetup.init();
          </fes:Constraint>
          <fes:Constraint name="ImplementsSpatialFilter">
             <ows:NoValues/>
-            <ows:DefaultValue>FALSE</ows:DefaultValue>
+            <ows:DefaultValue>TRUE</ows:DefaultValue>
          </fes:Constraint>
          <fes:Constraint name="ImplementsMinTemporalFilter">
             <ows:NoValues/>
-            <ows:DefaultValue>FALSE</ows:DefaultValue>
+            <ows:DefaultValue>TRUE</ows:DefaultValue>
          </fes:Constraint>
          <fes:Constraint name="ImplementsTemporalFilter">
             <ows:NoValues/>
-            <ows:DefaultValue>FALSE</ows:DefaultValue>
+            <ows:DefaultValue>TRUE</ows:DefaultValue>
          </fes:Constraint>
          <fes:Constraint name="ImplementsVersionNav">
             <ows:NoValues/>
@@ -340,9 +381,140 @@ TestSetup.init();
             <ows:NoValues/>
             <ows:DefaultValue>FALSE</ows:DefaultValue>
          </fes:Constraint>
+         <fes:Constraint name="ImplementsMinimumXPath">
+            <ows:NoValues/>
+            <ows:DefaultValue>TRUE</ows:DefaultValue>
+         </fes:Constraint>
+         <fes:Constraint name="ImplementsSchemaElementFunc">
+            <ows:NoValues/>
+            <ows:DefaultValue>TRUE</ows:DefaultValue>
+         </fes:Constraint>
       </fes:Conformance>
+      <fes:Id_Capabilities>
+         <fes:ResourceIdentifier name="fes:ResourceId"/>
+      </fes:Id_Capabilities>
+      <fes:Scalar_Capabilities>
+         <fes:LogicalOperators/>
+         <fes:ComparisonOperators>
+            <fes:ComparisonOperator name="PropertyIsEqualTo"/>
+            <fes:ComparisonOperator name="PropertyIsNotEqualTo"/>
+            <fes:ComparisonOperator name="PropertyIsLessThan"/>
+            <fes:ComparisonOperator name="PropertyIsGreaterThan"/>
+            <fes:ComparisonOperator name="PropertyIsLessThanOrEqualTo"/>
+            <fes:ComparisonOperator name="PropertyIsGreaterThanOrEqualTo"/>
+            <fes:ComparisonOperator name="PropertyIsLike"/>
+            <fes:ComparisonOperator name="PropertyIsNull"/>
+            <fes:ComparisonOperator name="PropertyIsNil"/>
+            <fes:ComparisonOperator name="PropertyIsBetween"/>
+         </fes:ComparisonOperators>
+      </fes:Scalar_Capabilities>
+      <fes:Spatial_Capabilities>
+         <fes:GeometryOperands>
+            <fes:GeometryOperand name="gml:Point"/>
+            <fes:GeometryOperand name="gml:MultiPoint"/>
+            <fes:GeometryOperand name="gml:LineString"/>
+            <fes:GeometryOperand name="gml:Arc"/>
+            <fes:GeometryOperand name="gml:CubicSpline"/>
+            <fes:GeometryOperand name="gml:MultiLineString"/>
+            <fes:GeometryOperand name="gml:Curve"/>
+            <fes:GeometryOperand name="gml:MultiCurve"/>
+            <fes:GeometryOperand name="gml:Polygon"/>
+            <fes:GeometryOperand name="gml:MultiSurface"/>
+            <fes:GeometryOperand name="gml:Box"/>
+            <fes:GeometryOperand name="gml:Envelope"/>
+         </fes:GeometryOperands>
+         <fes:SpatialOperators>
+            <fes:SpatialOperator name="BBOX"/>
+            <fes:SpatialOperator name="Equals"/>
+            <fes:SpatialOperator name="Disjoint"/>
+            <fes:SpatialOperator name="Intersects"/>
+            <fes:SpatialOperator name="Touches"/>
+            <fes:SpatialOperator name="Crosses"/>
+            <fes:SpatialOperator name="Within"/>
+            <fes:SpatialOperator name="Contains"/>
+            <fes:SpatialOperator name="Overlaps"/>
+            <fes:SpatialOperator name="Beyond"/>
+            <fes:SpatialOperator name="DWithin"/>
+         </fes:SpatialOperators>
+      </fes:Spatial_Capabilities>
+      <fes:Temporal_Capabilities>
+         <fes:TemporalOperands>
+            <fes:TemporalOperand name="gml:TimeInstant"/>
+            <fes:TemporalOperand name="gml:TimePeriod"/>
+         </fes:TemporalOperands>
+         <fes:TemporalOperators>
+            <fes:TemporalOperator name="During"/>
+         </fes:TemporalOperators>
+      </fes:Temporal_Capabilities>
+      <fes:Functions>
+         <fes:Function name="modulo">
+            <fes:Returns>xsd:integer</fes:Returns>
+            <fes:Arguments>
+               <fes:Argument name="dividend">
+                  <fes:Type>xsd:double</fes:Type>
+               </fes:Argument>
+               <fes:Argument name="divisor">
+                  <fes:Type>xsd:double</fes:Type>
+               </fes:Argument>
+            </fes:Arguments>
+         </fes:Function>
+         <fes:Function name="mod">
+            <fes:Returns>xsd:integer</fes:Returns>
+            <fes:Arguments>
+               <fes:Argument name="dividend">
+                  <fes:Type>xsd:double</fes:Type>
+               </fes:Argument>
+               <fes:Argument name="divisor">
+                  <fes:Type>xsd:double</fes:Type>
+               </fes:Argument>
+            </fes:Arguments>
+         </fes:Function>
+         <fes:Function name="abs">
+            <fes:Returns>xsd:integer</fes:Returns>
+            <fes:Arguments>
+               <fes:Argument name="value">
+                  <fes:Type>xsd:double</fes:Type>
+               </fes:Argument>
+            </fes:Arguments>
+         </fes:Function>
+         <fes:Function name="concatenate">
+            <fes:Returns>xsd:string</fes:Returns>
+            <fes:Arguments>
+               <fes:Argument name="value1">
+                  <fes:Type>xsd:string</fes:Type>
+               </fes:Argument>
+               <fes:Argument name="value2">
+                  <fes:Type>xsd:string</fes:Type>
+               </fes:Argument>
+            </fes:Arguments>
+         </fes:Function>
+         <fes:Function name="geodim">
+            <fes:Returns>xsd:integer</fes:Returns>
+            <fes:Arguments>
+               <fes:Argument name="value">
+                  <fes:Type>gml:AbstractGeometryType</fes:Type>
+               </fes:Argument>
+            </fes:Arguments>
+         </fes:Function>
+         <fes:Function name="geoArea">
+            <fes:Returns>xsd:integer</fes:Returns>
+            <fes:Arguments>
+               <fes:Argument name="value">
+                  <fes:Type>gml:AbstractGeometryType</fes:Type>
+               </fes:Argument>
+            </fes:Arguments>
+         </fes:Function>
+         <fes:Function name="geoLength">
+            <fes:Returns>xsd:integer</fes:Returns>
+            <fes:Arguments>
+               <fes:Argument name="value">
+                  <fes:Type>gml:AbstractGeometryType</fes:Type>
+               </fes:Argument>
+            </fes:Arguments>
+         </fes:Function>
+      </fes:Functions>
    </fes:Filter_Capabilities>
-</WFS_Capabilities>]]></con:value></con:property><con:property><con:name>service</con:name><con:value>wfs</con:value></con:property><con:property><con:name>version</con:name><con:value>2.0.0</con:value></con:property><con:property><con:name>qaf.ShortDescription</con:name><con:value/></con:property><con:property><con:name>qaf.Author</con:name><con:value>herrmann</con:value></con:property><con:property><con:name>qaf.CreationDate</con:name><con:value>2014-01-13T12:24:44.124+01:00</con:value></con:property><con:property><con:name>qaf.Version</con:name><con:value>1.0.0</con:value></con:property><con:property><con:name>qaf.AssociatedRequirements</con:name><con:value/></con:property><con:property><con:name>qaf.ExpectedResults</con:name><con:value/></con:property><con:property><con:name>qaf.Status</con:name><con:value>IMPLEMENTED</con:value></con:property><con:property><con:name>qaf.LastUpdateDate</con:name><con:value>2014-01-13T14:10:42.863+01:00</con:value></con:property></con:properties><con:reportParameters/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="GetCapabilities is schema valid" searchProperties="true" id="cd1450b6-612e-426b-8f02-b505d5aa7de0"><con:description>Validate Capabilites response against xsi:schemaLocation</con:description><con:settings/><con:testStep name="GetCapabilities" type="httprequest" id="2eb390b2-6b75-4598-9003-c5dd7b2dd0aa">
+</wfs:WFS_Capabilities>]]></con:value></con:property><con:property><con:name>service</con:name><con:value>wfs</con:value></con:property><con:property><con:name>version</con:name><con:value>2.0.0</con:value></con:property><con:property><con:name>qaf.ShortDescription</con:name><con:value/></con:property><con:property><con:name>qaf.Author</con:name><con:value>herrmann</con:value></con:property><con:property><con:name>qaf.CreationDate</con:name><con:value>2014-01-13T12:24:44.124+01:00</con:value></con:property><con:property><con:name>qaf.Version</con:name><con:value>1.0.0</con:value></con:property><con:property><con:name>qaf.AssociatedRequirements</con:name><con:value/></con:property><con:property><con:name>qaf.ExpectedResults</con:name><con:value/></con:property><con:property><con:name>qaf.Status</con:name><con:value>IMPLEMENTED</con:value></con:property><con:property><con:name>qaf.LastUpdateDate</con:name><con:value>2014-01-13T14:10:42.863+01:00</con:value></con:property></con:properties><con:reportParameters/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="GetCapabilities is schema valid" searchProperties="true" id="cd1450b6-612e-426b-8f02-b505d5aa7de0"><con:description>Validate Capabilites response against xsi:schemaLocation</con:description><con:settings/><con:testStep name="GetCapabilities" type="httprequest" id="2eb390b2-6b75-4598-9003-c5dd7b2dd0aa">
         <con:settings/>
         <con:config method="GET" name="GetCapabilities" timeout="0" xsi:type="con:HttpRequest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
@@ -468,13 +640,13 @@ for(operation in testStepNames) {
 		Util.setProjectProperty(testRunner, "endpt."+operation, endpt);
 	}
 }
-</script></con:config></con:testStep><con:testStep type="httprequest" name="GetFeature" id="d17afa66-5637-4bdb-9084-53df2f8a1d91"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" name="GetFeature" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:description>Request the first found FeatureType from the Capabilities to check if the GetFeature endpoint is available</con:description><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#endpt.GetFeature}</con:endpoint><con:request/><con:assertion type="XPath Match" name="Root element is FeatureCollection" id="b7be47fb-1c9a-4675-bfb1-18cd2bad4b27"><con:configuration><path>exists(/*:FeatureCollection)</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="OwsExceptionReportAssertion" name="No exception report" id="0045a266-6fee-4b74-bcab-ad5c0ea54d2b"/><con:assertion type="Invalid HTTP Status Codes" name="No 403, 404, 500 or 503 HTTP status code" id="95146f31-741c-433a-a8f9-e984b5fe8b8c"><con:configuration><codes>403, 404, 500, 503</codes></con:configuration></con:assertion><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:parameter><con:name>SERVICE</con:name><con:value>${#TestSuite#service}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>VERSION</con:name><con:value>${#TestSuite#version}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>REQUEST</con:name><con:value>GetFeature</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>RESULTTYPE</con:name><con:value>hits</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>TYPENAMES</con:name><con:value>${Transfer_Properties#featureTypeName}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>COUNT</con:name><con:value>1</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>OUTPUTFORMAT</con:name><con:value>${Transfer_Properties#outputFormat}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>NAMESPACE</con:name><con:value>xmlns(${Transfer_Properties#featureTypeNamespacePrefix},${Transfer_Properties#featureTypeNamespace})</con:value><con:style>QUERY</con:style></con:parameter></con:parameters></con:config></con:testStep><con:testStep type="httprequest" name="DescribeFeatureType" id="26fef0b4-6c6e-4203-b2e3-0a579520c0a6"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" name="DescribeFeatureType" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:description>Request the first found OutputFormat from the Capabilities to check if the DescribeFeatureType endpoint is available</con:description><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#endpt.GetFeature}</con:endpoint><con:request/><con:assertion type="XPath Match" name="Root element is Schema" id="a113f39f-81f2-4467-be8d-dd1892780f82"><con:configuration><path>exists(/*:schema)</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreOrder>false</ignoreOrder><acceptValidXPath>false</acceptValidXPath></con:configuration></con:assertion><con:assertion type="OwsExceptionReportAssertion" name="OwsExceptionReportAssertion" id="db8b4839-cfcd-462d-8c7b-661d9fbb8983"/><con:assertion type="Invalid HTTP Status Codes" name="Invalid HTTP Status Codes" id="a0fac5c6-b798-45ce-8669-dfb6c1fb866d"><con:configuration><codes>403, 404, 500, 503</codes></con:configuration></con:assertion><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:parameter><con:name>service</con:name><con:value>${#TestSuite#service}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>version</con:name><con:value>${#TestSuite#version}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>request</con:name><con:value>DescribeFeatureType</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>outputFormat</con:name><con:value>${Transfer_Properties#outputFormat}</con:value><con:style>QUERY</con:style></con:parameter></con:parameters></con:config></con:testStep><con:testStep type="httprequest" name="GetMap" disabled="true" id="93b9c5d0-d093-4a3a-aa59-85ebe2e4d27b"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" name="GetMap" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#endpt.GetMap}</con:endpoint><con:request/><con:assertion type="Invalid HTTP Status Codes" name="Invalid HTTP Status Codes" id="832e69d1-07bf-49dd-89a4-26c0365a4c31"><con:configuration><codes>403, 404, 500, 503</codes></con:configuration></con:assertion><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="GetFeatureInfo" disabled="true" id="e8ec1b94-f15a-440d-aa3a-c0dcfb3e6c8d"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" name="GetFeatureInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#endpt.GetFeatureInfo}</con:endpoint><con:request/><con:assertion type="Invalid HTTP Status Codes" name="Invalid HTTP Status Codes" id="1c79f946-b8e2-4e08-a6d9-f1dcaeeeae66"><con:configuration><codes>403, 404, 500, 503</codes></con:configuration></con:assertion><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:properties><con:property><con:name>qaf.ShortDescription</con:name><con:value/></con:property><con:property><con:name>qaf.Author</con:name><con:value>herrmann</con:value></con:property><con:property><con:name>qaf.CreationDate</con:name><con:value>2014-01-13T12:24:44.130+01:00</con:value></con:property><con:property><con:name>qaf.Version</con:name><con:value>1.0.0</con:value></con:property><con:property><con:name>qaf.AssociatedRequirements</con:name><con:value/></con:property><con:property><con:name>qaf.ExpectedResults</con:name><con:value/></con:property><con:property><con:name>qaf.Status</con:name><con:value>IMPLEMENTED</con:value></con:property><con:property><con:name>qaf.LastUpdateDate</con:name><con:value>2014-01-13T14:10:42.866+01:00</con:value></con:property></con:properties><con:reportParameters/></con:testCase><con:testCase failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="2" name="AutoConfigure WFS" searchProperties="true" id="ebaff77f-8a64-4681-8bf3-9888a42fb2ed" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword="">
+</script></con:config></con:testStep><con:testStep type="httprequest" name="GetFeature" id="d17afa66-5637-4bdb-9084-53df2f8a1d91"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" name="GetFeature" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:description>Request the first found FeatureType from the Capabilities to check if the GetFeature endpoint is available</con:description><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#endpt.GetFeature}</con:endpoint><con:request/><con:assertion type="XPath Match" name="Root element is FeatureCollection" id="b7be47fb-1c9a-4675-bfb1-18cd2bad4b27"><con:configuration><path>exists(/*:FeatureCollection)</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="OwsExceptionReportAssertion" name="No exception report" id="0045a266-6fee-4b74-bcab-ad5c0ea54d2b"/><con:assertion type="Invalid HTTP Status Codes" name="No 403, 404, 500 or 503 HTTP status code" id="95146f31-741c-433a-a8f9-e984b5fe8b8c"><con:configuration><codes>403, 404, 500, 503</codes></con:configuration></con:assertion><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:parameter><con:name>SERVICE</con:name><con:value>${#TestSuite#service}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>VERSION</con:name><con:value>${#TestSuite#version}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>REQUEST</con:name><con:value>GetFeature</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>RESULTTYPE</con:name><con:value>hits</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>TYPENAMES</con:name><con:value>${Transfer_Properties#featureTypeName}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>COUNT</con:name><con:value>1</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>OUTPUTFORMAT</con:name><con:value>${Transfer_Properties#outputFormat}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>NAMESPACES</con:name><con:value>xmlns(${Transfer_Properties#featureTypeNamespacePrefix},${Transfer_Properties#featureTypeNamespace})</con:value><con:style>QUERY</con:style></con:parameter></con:parameters></con:config></con:testStep><con:testStep type="httprequest" name="DescribeFeatureType" id="26fef0b4-6c6e-4203-b2e3-0a579520c0a6"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" name="DescribeFeatureType" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:description>Request the first found OutputFormat from the Capabilities to check if the DescribeFeatureType endpoint is available</con:description><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#endpt.GetFeature}</con:endpoint><con:request/><con:assertion type="XPath Match" name="Root element is Schema" id="a113f39f-81f2-4467-be8d-dd1892780f82"><con:configuration><path>exists(/*:schema)</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreOrder>false</ignoreOrder><acceptValidXPath>false</acceptValidXPath></con:configuration></con:assertion><con:assertion type="OwsExceptionReportAssertion" name="OwsExceptionReportAssertion" id="db8b4839-cfcd-462d-8c7b-661d9fbb8983"/><con:assertion type="Invalid HTTP Status Codes" name="Invalid HTTP Status Codes" id="a0fac5c6-b798-45ce-8669-dfb6c1fb866d"><con:configuration><codes>403, 404, 500, 503</codes></con:configuration></con:assertion><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:parameter><con:name>service</con:name><con:value>${#TestSuite#service}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>version</con:name><con:value>${#TestSuite#version}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>request</con:name><con:value>DescribeFeatureType</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>outputFormat</con:name><con:value>${Transfer_Properties#outputFormat}</con:value><con:style>QUERY</con:style></con:parameter></con:parameters></con:config></con:testStep><con:testStep type="httprequest" name="GetMap" disabled="true" id="93b9c5d0-d093-4a3a-aa59-85ebe2e4d27b"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" name="GetMap" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#endpt.GetMap}</con:endpoint><con:request/><con:assertion type="Invalid HTTP Status Codes" name="Invalid HTTP Status Codes" id="832e69d1-07bf-49dd-89a4-26c0365a4c31"><con:configuration><codes>403, 404, 500, 503</codes></con:configuration></con:assertion><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="GetFeatureInfo" disabled="true" id="e8ec1b94-f15a-440d-aa3a-c0dcfb3e6c8d"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" name="GetFeatureInfo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#endpt.GetFeatureInfo}</con:endpoint><con:request/><con:assertion type="Invalid HTTP Status Codes" name="Invalid HTTP Status Codes" id="1c79f946-b8e2-4e08-a6d9-f1dcaeeeae66"><con:configuration><codes>403, 404, 500, 503</codes></con:configuration></con:assertion><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:properties><con:property><con:name>qaf.ShortDescription</con:name><con:value/></con:property><con:property><con:name>qaf.Author</con:name><con:value>herrmann</con:value></con:property><con:property><con:name>qaf.CreationDate</con:name><con:value>2014-01-13T12:24:44.130+01:00</con:value></con:property><con:property><con:name>qaf.Version</con:name><con:value>1.0.0</con:value></con:property><con:property><con:name>qaf.AssociatedRequirements</con:name><con:value/></con:property><con:property><con:name>qaf.ExpectedResults</con:name><con:value/></con:property><con:property><con:name>qaf.Status</con:name><con:value>IMPLEMENTED</con:value></con:property><con:property><con:name>qaf.LastUpdateDate</con:name><con:value>2014-01-13T14:10:42.866+01:00</con:value></con:property></con:properties><con:reportParameters/></con:testCase><con:testCase failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="2" name="AutoConfigure WFS" searchProperties="true" id="ebaff77f-8a64-4681-8bf3-9888a42fb2ed" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword="">
       <con:description>Technical test case. Parse DescribeFeatureType responses and check the number of available Features.</con:description><con:settings/>
       
       
       
       <con:properties><con:property><con:name>qaf.ShortDescription</con:name><con:value/></con:property><con:property><con:name>qaf.Author</con:name><con:value>herrmann</con:value></con:property><con:property><con:name>qaf.CreationDate</con:name><con:value>2014-01-13T12:24:44.129+01:00</con:value></con:property><con:property><con:name>qaf.Version</con:name><con:value>1.0.0</con:value></con:property><con:property><con:name>qaf.AssociatedRequirements</con:name><con:value/></con:property><con:property><con:name>qaf.ExpectedResults</con:name><con:value/></con:property><con:property><con:name>qaf.Status</con:name><con:value>IMPLEMENTED</con:value></con:property><con:property><con:name>qaf.LastUpdateDate</con:name><con:value>2014-01-13T14:10:42.865+01:00</con:value></con:property><con:property><con:name>etf.technicalStep</con:name><con:value>true</con:value></con:property></con:properties>
-      <con:testStep type="properties" name="Transfer_Properties" id="c815437e-eabd-477b-8e87-10e3ae2fd93b"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>featureTypeName</con:name><con:value>CP:CadastralBoundary</con:value></con:property><con:property><con:name>version</con:name><con:value>2.0.0</con:value></con:property><con:property><con:name>outputFormat</con:name><con:value>text/xml; subtype=gml/3.2.1</con:value></con:property><con:property><con:name>FT.NAMESPACES.X</con:name><con:value xsi:nil="true"/></con:property><con:property><con:name>FT.NAMESPACES.GET</con:name><con:value xsi:nil="true"/></con:property><con:property><con:name>FT.PROPERTY.NAME</con:name><con:value xsi:nil="true"/></con:property><con:property><con:name>FT.NAME</con:name><con:value xsi:nil="true"/></con:property><con:property><con:name>FT.PREFIX</con:name><con:value xsi:nil="true"/></con:property><con:property><con:name>FT.NAMESPACE</con:name><con:value/></con:property><con:property><con:name>FT.NAMESPACES</con:name><con:value xsi:nil="true"/></con:property><con:property><con:name>featureTypeNamespaceWfs2</con:name><con:value>xmlns(CP,urn:x-inspire:specification:gmlas:CadastralParcels:3.0)</con:value></con:property></con:properties></con:config></con:testStep>
+      <con:testStep type="properties" name="Transfer_Properties" id="c815437e-eabd-477b-8e87-10e3ae2fd93b"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>featureTypeName</con:name><con:value>ci:State</con:value></con:property><con:property><con:name>version</con:name><con:value>2.0.0</con:value></con:property><con:property><con:name>outputFormat</con:name><con:value>text/xml; subtype=gml/3.2.1</con:value></con:property><con:property><con:name>FT.NAMESPACES.X</con:name><con:value xsi:nil="true"/></con:property><con:property><con:name>FT.NAMESPACES.GET</con:name><con:value xsi:nil="true"/></con:property><con:property><con:name>FT.PROPERTY.NAME</con:name><con:value xsi:nil="true"/></con:property><con:property><con:name>FT.NAME</con:name><con:value xsi:nil="true"/></con:property><con:property><con:name>FT.PREFIX</con:name><con:value xsi:nil="true"/></con:property><con:property><con:name>FT.NAMESPACE</con:name><con:value/></con:property><con:property><con:name>FT.NAMESPACES</con:name><con:value xsi:nil="true"/></con:property><con:property><con:name>featureTypeNamespaceWfs2</con:name><con:value>xmlns(ci,http://www.interactive-instruments.de/namespaces/demo/cities/4.0/cities)</con:value></con:property></con:properties></con:config></con:testStep>
     <con:testStep name="GetCapabilities" type="httprequest" id="3ea87b60-25f6-46e2-9685-2e28b15c9cfe">
         <con:settings/>
         <con:config method="GET" name="GetCapabilities" timeout="0" xsi:type="con:HttpRequest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -626,7 +798,7 @@ def cap = new Capabilities();
 cap.setCapabilities(ph.getTestStepResult('GetCapabilities'));
 new ObjectSaver().save(cap);
 </script></con:config>
-      </con:testStep><con:testStep type="httprequest" name="Get Schema Definition" id="61d7f29c-ac56-42af-ae5e-5448ee1c7359"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" name="Get Schema Definition" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:description>Get the schema</con:description><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#endpt.DescribeFeatureType}</con:endpoint><con:request/><con:assertion type="XPath Match" name="Root element is Schema" id="a113f39f-81f2-4467-be8d-dd1892780f82"><con:configuration><path>exists(/*:schema)</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreOrder>false</ignoreOrder><acceptValidXPath>false</acceptValidXPath></con:configuration></con:assertion><con:assertion type="XPath Match" name="Expect no Exception" id="bb17ff5e-a967-4df7-a6ac-94b35c53e453"><con:configuration><path>exists(/*:ServiceExceptionReport) or (/*:ExceptionReport)</path><content>false</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreOrder>false</ignoreOrder><acceptValidXPath>false</acceptValidXPath></con:configuration></con:assertion><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:parameter><con:name>service</con:name><con:value>${#TestSuite#service}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>version</con:name><con:value>${#TestSuite#version}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>request</con:name><con:value>DescribeFeatureType</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>outputFormat</con:name><con:value>${Transfer_Properties#outputFormat}</con:value><con:style>QUERY</con:style></con:parameter></con:parameters></con:config></con:testStep><con:testStep type="httprequest" name="Get number of Features in DB" id="035f1703-14ca-4d5c-88e9-9143a84327d8"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" name="Get number of Features in DB" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:description>GetFeature request with RESULTTYPE=hits</con:description><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#endpt.GetFeature}</con:endpoint><con:request/><con:assertion type="XPath Match" name="Root element is FeatureCollection" id="7caba3f1-af14-42dc-83f7-abb28b7927ac"><con:configuration><path>exists(/*:FeatureCollection)</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreOrder>false</ignoreOrder><acceptValidXPath>false</acceptValidXPath></con:configuration></con:assertion><con:assertion type="XPath Match" name="Expect no Exception" id="2b311676-82bb-48e9-b655-c7ae550565e6"><con:configuration><path>exists(/*:ServiceExceptionReport) or (/*:ExceptionReport)</path><content>false</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreOrder>false</ignoreOrder><acceptValidXPath>false</acceptValidXPath></con:configuration></con:assertion><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:parameter><con:name>SERVICE</con:name><con:value>${#TestSuite#service}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>VERSION</con:name><con:value>${#TestSuite#version}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>REQUEST</con:name><con:value>GetFeature</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>RESULTTYPE</con:name><con:value>hits</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>TYPENAMES</con:name><con:value>${Transfer_Properties#featureTypeName}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>OUTPUTFORMAT</con:name><con:value>${Transfer_Properties#outputFormat}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>NAMESPACE</con:name><con:value>${Transfer_Properties#featureTypeNamespaceWfs2}</con:value><con:style>QUERY</con:style></con:parameter></con:parameters></con:config></con:testStep><con:reportParameters/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="ObjectSaver" searchProperties="true" disabled="true" id="195d6c56-d4bf-4cdc-8af0-b34312e2d414">
+      </con:testStep><con:testStep type="httprequest" name="Get Schema Definition" id="61d7f29c-ac56-42af-ae5e-5448ee1c7359"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" name="Get Schema Definition" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:description>Get the schema</con:description><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#endpt.DescribeFeatureType}</con:endpoint><con:request/><con:assertion type="XPath Match" name="Root element is Schema" id="a113f39f-81f2-4467-be8d-dd1892780f82"><con:configuration><path>exists(/*:schema)</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreOrder>false</ignoreOrder><acceptValidXPath>false</acceptValidXPath></con:configuration></con:assertion><con:assertion type="XPath Match" name="Expect no Exception" id="bb17ff5e-a967-4df7-a6ac-94b35c53e453"><con:configuration><path>exists(/*:ServiceExceptionReport) or (/*:ExceptionReport)</path><content>false</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreOrder>false</ignoreOrder><acceptValidXPath>false</acceptValidXPath></con:configuration></con:assertion><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:parameter><con:name>service</con:name><con:value>${#TestSuite#service}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>version</con:name><con:value>${#TestSuite#version}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>request</con:name><con:value>DescribeFeatureType</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>outputFormat</con:name><con:value>${Transfer_Properties#outputFormat}</con:value><con:style>QUERY</con:style></con:parameter></con:parameters></con:config></con:testStep><con:testStep type="httprequest" name="Get number of Features in DB" id="035f1703-14ca-4d5c-88e9-9143a84327d8"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" name="Get number of Features in DB" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:description>GetFeature request with RESULTTYPE=hits</con:description><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#endpt.GetFeature}</con:endpoint><con:request/><con:assertion type="XPath Match" name="Root element is FeatureCollection" id="7caba3f1-af14-42dc-83f7-abb28b7927ac"><con:configuration><path>exists(/*:FeatureCollection)</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreOrder>false</ignoreOrder><acceptValidXPath>false</acceptValidXPath></con:configuration></con:assertion><con:assertion type="XPath Match" name="Expect no Exception" id="2b311676-82bb-48e9-b655-c7ae550565e6"><con:configuration><path>exists(/*:ServiceExceptionReport) or (/*:ExceptionReport)</path><content>false</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreOrder>false</ignoreOrder><acceptValidXPath>false</acceptValidXPath></con:configuration></con:assertion><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:parameter><con:name>SERVICE</con:name><con:value>${#TestSuite#service}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>VERSION</con:name><con:value>${#TestSuite#version}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>REQUEST</con:name><con:value>GetFeature</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>RESULTTYPE</con:name><con:value>hits</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>TYPENAMES</con:name><con:value>${Transfer_Properties#featureTypeName}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>OUTPUTFORMAT</con:name><con:value>${Transfer_Properties#outputFormat}</con:value><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>NAMESPACES</con:name><con:value>${Transfer_Properties#featureTypeNamespaceWfs2}</con:value><con:style>QUERY</con:style></con:parameter></con:parameters></con:config></con:testStep><con:reportParameters/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="ObjectSaver" searchProperties="true" disabled="true" id="195d6c56-d4bf-4cdc-8af0-b34312e2d414">
       <con:description>Dieser Testfall wird lediglich für die Persistierung von XTF-OWSGTL Objekten genutzt und ist deaktiviert.</con:description><con:settings/>
       
     <con:testStep type="properties" name="TransientObjects" id="dccd37c1-7f55-43ca-8843-8aa6e0435a32"><con:description>This test step stores objects that can be accessed via the de.interactive_instruments.ObjectSaver class.</con:description><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" discardValuesOnSave="true" createMissingOnLoad="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>de.interactive_instruments.xtf.wfs.Capabilities</con:name><con:value xsi:nil="true"/></con:property></con:properties></con:config></con:testStep><con:testStep type="properties" name="PersistentObjects" id="99dd9326-161c-41ce-bcf8-e358a8581537"><con:description>This test step stores objects that can be accessed via the de.interactive_instruments.ObjectSaver class.</con:description><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" discardValuesOnSave="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties/></con:config></con:testStep><con:properties><con:property><con:name>qaf.ShortDescription</con:name><con:value/></con:property><con:property><con:name>qaf.Author</con:name><con:value>herrmann</con:value></con:property><con:property><con:name>qaf.CreationDate</con:name><con:value>2014-01-13T12:24:44.132+01:00</con:value></con:property><con:property><con:name>qaf.Version</con:name><con:value>1.0.0</con:value></con:property><con:property><con:name>qaf.AssociatedRequirements</con:name><con:value/></con:property><con:property><con:name>qaf.ExpectedResults</con:name><con:value/></con:property><con:property><con:name>qaf.Status</con:name><con:value>IMPLEMENTED</con:value></con:property><con:property><con:name>qaf.LastUpdateDate</con:name><con:value>2014-01-13T14:10:42.868+01:00</con:value></con:property><con:property><con:name>etf.technicalStep</con:name><con:value>true</con:value></con:property></con:properties><con:reportParameters/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Requirements" searchProperties="true" id="65ccaf8e-a648-4420-9ea8-fe6f80fb0aae" disabled="true"><con:description>Load Requirements file.</con:description><con:settings/><con:testStep type="groovy" name="Requirements" id="8f30751d-4639-47a1-a4f1-f7017877d578" disabled="true"><con:settings/><con:config><script>// Load Requierments properties
@@ -644,36 +816,42 @@ def testCase = testRunner.testCase
 
 // Load properties from file
 testCase.addPropertiesFromFile(file.path)</script></con:config></con:testStep><con:properties><con:property><con:name>qaf.ShortDescription</con:name><con:value/></con:property><con:property><con:name>qaf.Author</con:name><con:value>herrmann</con:value></con:property><con:property><con:name>qaf.CreationDate</con:name><con:value>2014-01-13T12:24:44.133+01:00</con:value></con:property><con:property><con:name>qaf.Version</con:name><con:value>1.0.0</con:value></con:property><con:property><con:name>qaf.AssociatedRequirements</con:name><con:value/></con:property><con:property><con:name>qaf.ExpectedResults</con:name><con:value/></con:property><con:property><con:name>qaf.Status</con:name><con:value>IMPLEMENTED</con:value></con:property><con:property><con:name>qaf.LastUpdateDate</con:name><con:value>2014-01-13T14:10:42.868+01:00</con:value></con:property><con:property><con:name>II-REQ##REQ-01__Description</con:name><con:value>l</con:value></con:property><con:property><con:name>II-REQ##REQ-01__Name</con:name><con:value>l</con:value></con:property><con:property><con:name>etf.technicalStep</con:name><con:value>true</con:value></con:property></con:properties></con:testCase><con:setupScript/><con:reportParameters/></con:testSuite><con:testSuite name="Check FeatureType references" id="02bdd038-90ee-41de-a5e3-4d01895ffc7f"><con:description/><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="8" name="Generate requests for each FeatureType" searchProperties="true" id="7db093a3-fcd4-46c5-8ef2-13601ffda2d3" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword=""><con:description>Technical test case. This test cases generates a GetFeature request for each FeatureType and requests a number of  Features.
-Afterwards requests are generated for each unique resource in the FeatureCollection (except for Feature references within the collection).</con:description><con:settings/><con:testStep type="calltestcase" name="Check service availability" id="299cbf47-bb35-4f9b-986d-edb89772e934"><con:description>Checks if the endpoint is still available</con:description><con:settings/><con:config xsi:type="con:RunTestCaseStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>7a9c4927-bb81-4238-93c1-6f7136064967</con:targetTestCase><con:properties><con:property><con:name>capabilities</con:name><con:value><![CDATA[<WFS_Capabilities version="2.0.0" xsi:schemaLocation="http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd" xmlns="http://www.opengis.net/wfs/2.0" xmlns:wfs="http://www.opengis.net/wfs/2.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:ogc="http://www.opengis.net/ogc" xmlns:fes="http://www.opengis.net/fes/2.0" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+Afterwards requests are generated for each unique resource in the FeatureCollection (except for Feature references within the collection).</con:description><con:settings/><con:testStep type="calltestcase" name="Check service availability" id="299cbf47-bb35-4f9b-986d-edb89772e934"><con:description>Checks if the endpoint is still available</con:description><con:settings/><con:config xsi:type="con:RunTestCaseStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>7a9c4927-bb81-4238-93c1-6f7136064967</con:targetTestCase><con:properties><con:property><con:name>capabilities</con:name><con:value><![CDATA[<wfs:WFS_Capabilities xsi:schemaLocation="http://www.opengis.net/wfs/2.0 http://services.interactive-instruments.de/cite2013wfs/simpledemo/schema/ogc/wfs/2.0/wfs.xsd" version="2.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wfs="http://www.opengis.net/wfs/2.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:fes="http://www.opengis.net/fes/2.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
    <ows:ServiceIdentification>
-      <ows:Title>Development version of Inspire Transport Network Road.</ows:Title>
-      <ows:Abstract>Direct Access Download Service forInspire Transport Network Road. Data from the Norwegian Road Authority.
-      Development version, changes and downtime may occur.</ows:Abstract>
-      <ows:ServiceType codeSpace="http://www.opengeospatial.org/">WFS</ows:ServiceType>
-      <ows:ServiceTypeVersion>2.0.0</ows:ServiceTypeVersion>
+      <ows:Title>SimpleDemo WFS</ows:Title>
+      <ows:Abstract>SimpleDemo WFS by XtraServer</ows:Abstract>
+      <ows:Keywords>
+         <ows:Keyword>XtraServer Demo</ows:Keyword>
+         <ows:Keyword>WFS</ows:Keyword>
+         <ows:Keyword>SimpleDemo</ows:Keyword>
+      </ows:Keywords>
+      <ows:ServiceType>WFS</ows:ServiceType>
+      <ows:ServiceTypeVersion>1.0.0</ows:ServiceTypeVersion>
       <ows:ServiceTypeVersion>1.1.0</ows:ServiceTypeVersion>
+      <ows:ServiceTypeVersion>2.0.0</ows:ServiceTypeVersion>
+      <ows:Fees>The use of this service is restricted. Please contact us.</ows:Fees>
+      <ows:AccessConstraints>The use of this service is restricted. Please contact us.</ows:AccessConstraints>
    </ows:ServiceIdentification>
    <ows:ServiceProvider>
-      <ows:ProviderName>Norwegian Mapping Authorty</ows:ProviderName>
-      <ows:ProviderSite xlink:href="http://www.kartverket.no"/>
+      <ows:ProviderName>interactive instruments GmbH</ows:ProviderName>
+      <ows:ProviderSite/>
       <ows:ServiceContact>
-         <ows:IndividualName>Frank Arntsen</ows:IndividualName>
+         <ows:IndividualName>XtraServer SimpleDemo Team</ows:IndividualName>
+         <ows:PositionName>Team</ows:PositionName>
          <ows:ContactInfo>
             <ows:Phone>
-               <ows:Voice/>
-               <ows:Facsimile/>
+               <ows:Voice>+49 228 9141070</ows:Voice>
+               <ows:Facsimile>+49 228 9141090</ows:Facsimile>
             </ows:Phone>
             <ows:Address>
-               <ows:DeliveryPoint>Kartverksveien 21</ows:DeliveryPoint>
-               <ows:City>Hønefoss</ows:City>
-               <ows:AdministrativeArea>Ringrike</ows:AdministrativeArea>
-               <ows:PostalCode>3507</ows:PostalCode>
-               <ows:Country>Norway</ows:Country>
-               <ows:ElectronicMailAddress>frank.arntsen@kartverket.no</ows:ElectronicMailAddress>
+               <ows:City>Bonn</ows:City>
+               <ows:AdministrativeArea>NRW</ows:AdministrativeArea>
+               <ows:PostalCode>53115</ows:PostalCode>
+               <ows:Country>DE</ows:Country>
+               <ows:ElectronicMailAddress>xtraserver@interactive-instruments.de</ows:ElectronicMailAddress>
             </ows:Address>
-            <ows:OnlineResource xlink:href="http://www.kartverket.no"/>
-            <ows:HoursOfService/>
-            <ows:ContactInstructions/>
+            <ows:OnlineResource xlink:href="http://www.interactive-instruments.de"/>
+            <ows:HoursOfService>0900 - 1800 GMT+1, Mon - Fri</ows:HoursOfService>
          </ows:ContactInfo>
          <ows:Role>PointOfContact</ows:Role>
       </ows:ServiceContact>
@@ -682,14 +860,15 @@ Afterwards requests are generated for each unique resource in the FeatureCollect
       <ows:Operation name="GetCapabilities">
          <ows:DCP>
             <ows:HTTP>
-               <ows:Get xlink:href="http://wfs.geonorge.no/skwms1/wfs.inspire-tn-ro_test?"/>
-               <ows:Post xlink:href="http://wfs.geonorge.no/skwms1/wfs.inspire-tn-ro_test?"/>
+               <ows:Get xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs?"/>
+               <ows:Post xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs"/>
             </ows:HTTP>
          </ows:DCP>
          <ows:Parameter name="AcceptVersions">
             <ows:AllowedValues>
-               <ows:Value>2.0.0</ows:Value>
+               <ows:Value>1.0.0</ows:Value>
                <ows:Value>1.1.0</ows:Value>
+               <ows:Value>2.0.0</ows:Value>
             </ows:AllowedValues>
          </ows:Parameter>
          <ows:Parameter name="AcceptFormats">
@@ -710,71 +889,70 @@ Afterwards requests are generated for each unique resource in the FeatureCollect
       <ows:Operation name="DescribeFeatureType">
          <ows:DCP>
             <ows:HTTP>
-               <ows:Get xlink:href="http://wfs.geonorge.no/skwms1/wfs.inspire-tn-ro_test?"/>
-               <ows:Post xlink:href="http://wfs.geonorge.no/skwms1/wfs.inspire-tn-ro_test?"/>
+               <ows:Get xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs?"/>
+               <ows:Post xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs"/>
             </ows:HTTP>
          </ows:DCP>
+         <ows:Parameter name="outputFormat">
+            <ows:AllowedValues>
+               <ows:Value>text/xml; subtype=gml/2.1.2</ows:Value>
+               <ows:Value>application/gml+xml; version=2.1</ows:Value>
+               <ows:Value>text/xml; subtype=gml/3.1.1</ows:Value>
+               <ows:Value>application/gml+xml; version=3.1</ows:Value>
+               <ows:Value>text/xml; subtype=gml/3.2.1</ows:Value>
+               <ows:Value>application/gml+xml; version=3.2</ows:Value>
+            </ows:AllowedValues>
+         </ows:Parameter>
+      </ows:Operation>
+      <ows:Operation name="GetFeature">
+         <ows:DCP>
+            <ows:HTTP>
+               <ows:Get xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs?"/>
+               <ows:Post xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs"/>
+            </ows:HTTP>
+         </ows:DCP>
+         <ows:Parameter name="outputFormat">
+            <ows:AllowedValues>
+               <ows:Value>text/xml; subtype=gml/2.1.2</ows:Value>
+               <ows:Value>application/gml+xml; version=2.1</ows:Value>
+               <ows:Value>text/xml; subtype=gml/3.1.1</ows:Value>
+               <ows:Value>application/gml+xml; version=3.1</ows:Value>
+               <ows:Value>text/xml; subtype=gml/3.2.1</ows:Value>
+               <ows:Value>application/gml+xml; version=3.2</ows:Value>
+            </ows:AllowedValues>
+         </ows:Parameter>
+      </ows:Operation>
+      <ows:Operation name="GetPropertyValue">
+         <ows:DCP>
+            <ows:HTTP>
+               <ows:Get xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs?"/>
+               <ows:Post xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs"/>
+            </ows:HTTP>
+         </ows:DCP>
+         <ows:Parameter name="outputFormat">
+            <ows:AllowedValues>
+               <ows:Value>text/xml; subtype=gml/2.1.2</ows:Value>
+               <ows:Value>application/gml+xml; version=2.1</ows:Value>
+               <ows:Value>text/xml; subtype=gml/3.1.1</ows:Value>
+               <ows:Value>application/gml+xml; version=3.1</ows:Value>
+               <ows:Value>text/xml; subtype=gml/3.2.1</ows:Value>
+               <ows:Value>application/gml+xml; version=3.2</ows:Value>
+            </ows:AllowedValues>
+         </ows:Parameter>
       </ows:Operation>
       <ows:Operation name="ListStoredQueries">
          <ows:DCP>
             <ows:HTTP>
-               <ows:Get xlink:href="http://wfs.geonorge.no/skwms1/wfs.inspire-tn-ro_test?"/>
-               <ows:Post xlink:href="http://wfs.geonorge.no/skwms1/wfs.inspire-tn-ro_test?"/>
+               <ows:Get xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs?"/>
+               <ows:Post xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs"/>
             </ows:HTTP>
          </ows:DCP>
       </ows:Operation>
       <ows:Operation name="DescribeStoredQueries">
          <ows:DCP>
             <ows:HTTP>
-               <ows:Get xlink:href="http://wfs.geonorge.no/skwms1/wfs.inspire-tn-ro_test?"/>
-               <ows:Post xlink:href="http://wfs.geonorge.no/skwms1/wfs.inspire-tn-ro_test?"/>
-            </ows:HTTP>
-         </ows:DCP>
-      </ows:Operation>
-      <ows:Operation name="GetFeature">
-         <ows:DCP>
-            <ows:HTTP>
-               <ows:Get xlink:href="http://wfs.geonorge.no/skwms1/wfs.inspire-tn-ro_test?"/>
-               <ows:Post xlink:href="http://wfs.geonorge.no/skwms1/wfs.inspire-tn-ro_test?"/>
-            </ows:HTTP>
-         </ows:DCP>
-      </ows:Operation>
-      <ows:Operation name="GetPropertyValue">
-         <ows:DCP>
-            <ows:HTTP>
-               <ows:Get xlink:href="http://wfs.geonorge.no/skwms1/wfs.inspire-tn-ro_test?"/>
-               <ows:Post xlink:href="http://wfs.geonorge.no/skwms1/wfs.inspire-tn-ro_test?"/>
-            </ows:HTTP>
-         </ows:DCP>
-      </ows:Operation>
-      <ows:Operation name="Transaction">
-         <ows:DCP>
-            <ows:HTTP>
-               <ows:Post xlink:href="http://wfs.geonorge.no/skwms1/wfs.inspire-tn-ro_test?"/>
-            </ows:HTTP>
-         </ows:DCP>
-         <ows:Constraint name="AutomaticDataLocking">
-            <ows:NoValues/>
-            <ows:DefaultValue>TRUE</ows:DefaultValue>
-         </ows:Constraint>
-         <ows:Constraint name="PreservesSiblingOrder">
-            <ows:NoValues/>
-            <ows:DefaultValue>TRUE</ows:DefaultValue>
-         </ows:Constraint>
-      </ows:Operation>
-      <ows:Operation name="GetFeatureWithLock">
-         <ows:DCP>
-            <ows:HTTP>
-               <ows:Get xlink:href="http://wfs.geonorge.no/skwms1/wfs.inspire-tn-ro_test?"/>
-               <ows:Post xlink:href="http://wfs.geonorge.no/skwms1/wfs.inspire-tn-ro_test?"/>
-            </ows:HTTP>
-         </ows:DCP>
-      </ows:Operation>
-      <ows:Operation name="LockFeature">
-         <ows:DCP>
-            <ows:HTTP>
-               <ows:Get xlink:href="http://wfs.geonorge.no/skwms1/wfs.inspire-tn-ro_test?"/>
-               <ows:Post xlink:href="http://wfs.geonorge.no/skwms1/wfs.inspire-tn-ro_test?"/>
+               <ows:Get xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs?"/>
+               <ows:Post xlink:href="http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs"/>
             </ows:HTTP>
          </ows:DCP>
       </ows:Operation>
@@ -782,45 +960,16 @@ Afterwards requests are generated for each unique resource in the FeatureCollect
          <ows:AllowedValues>
             <ows:Value>2.0.0</ows:Value>
             <ows:Value>1.1.0</ows:Value>
+            <ows:Value>1.0.0</ows:Value>
          </ows:AllowedValues>
       </ows:Parameter>
       <ows:Parameter name="srsName">
          <ows:AllowedValues>
             <ows:Value>urn:ogc:def:crs:EPSG::25833</ows:Value>
-            <ows:Value>urn:ogc:def:crs:EPSG::4258</ows:Value>
-            <ows:Value>urn:ogc:def:crs:EPSG::3035</ows:Value>
-            <ows:Value>urn:ogc:def:crs:EPSG::3044</ows:Value>
-            <ows:Value>urn:ogc:def:crs:EPSG::3045</ows:Value>
-            <ows:Value>urn:ogc:def:crs:EPSG::3046</ows:Value>
-            <ows:Value>urn:ogc:def:crs:EPSG::3047</ows:Value>
-            <ows:Value>urn:ogc:def:crs:EPSG::3048</ows:Value>
-            <ows:Value>urn:ogc:def:crs:EPSG::4326</ows:Value>
-            <ows:Value>urn:ogc:def:crs:EPSG::25829</ows:Value>
-            <ows:Value>urn:ogc:def:crs:EPSG::25830</ows:Value>
-            <ows:Value>urn:ogc:def:crs:EPSG::25831</ows:Value>
-            <ows:Value>urn:ogc:def:crs:EPSG::25832</ows:Value>
-            <ows:Value>urn:ogc:def:crs:EPSG::25834</ows:Value>
-            <ows:Value>urn:ogc:def:crs:EPSG::25835</ows:Value>
-            <ows:Value>urn:ogc:def:crs:EPSG::25836</ows:Value>
-            <ows:Value>urn:ogc:def:crs:EPSG::32632</ows:Value>
-            <ows:Value>urn:ogc:def:crs:EPSG::32633</ows:Value>
-            <ows:Value>urn:ogc:def:crs:EPSG::32634</ows:Value>
-            <ows:Value>urn:ogc:def:crs:EPSG::32635</ows:Value>
+            <ows:Value>urn:ogc:def:crs:EPSG::3034</ows:Value>
             <ows:Value>urn:ogc:def:crs:EPSG::3857</ows:Value>
-         </ows:AllowedValues>
-      </ows:Parameter>
-      <ows:Parameter name="outputFormat">
-         <ows:AllowedValues>
-            <ows:Value>text/xml; subtype=gml/3.2.1</ows:Value>
-            <ows:Value>application/gml+xml; version=3.2</ows:Value>
-         </ows:AllowedValues>
-      </ows:Parameter>
-      <ows:Parameter name="resolve">
-         <ows:AllowedValues>
-            <ows:Value>none</ows:Value>
-            <ows:Value>local</ows:Value>
-            <ows:Value>remote</ows:Value>
-            <ows:Value>all</ows:Value>
+            <ows:Value>urn:ogc:def:crs:EPSG::4258</ows:Value>
+            <ows:Value>urn:ogc:def:crs:EPSG::4326</ows:Value>
          </ows:AllowedValues>
       </ows:Parameter>
       <ows:Constraint name="ImplementsSimpleWFS">
@@ -833,11 +982,11 @@ Afterwards requests are generated for each unique resource in the FeatureCollect
       </ows:Constraint>
       <ows:Constraint name="ImplementsTransactionalWFS">
          <ows:NoValues/>
-         <ows:DefaultValue>TRUE</ows:DefaultValue>
+         <ows:DefaultValue>FALSE</ows:DefaultValue>
       </ows:Constraint>
       <ows:Constraint name="ImplementsLockingWFS">
          <ows:NoValues/>
-         <ows:DefaultValue>TRUE</ows:DefaultValue>
+         <ows:DefaultValue>FALSE</ows:DefaultValue>
       </ows:Constraint>
       <ows:Constraint name="KVPEncoding">
          <ows:NoValues/>
@@ -849,11 +998,11 @@ Afterwards requests are generated for each unique resource in the FeatureCollect
       </ows:Constraint>
       <ows:Constraint name="SOAPEncoding">
          <ows:NoValues/>
-         <ows:DefaultValue>FALSE</ows:DefaultValue>
+         <ows:DefaultValue>TRUE</ows:DefaultValue>
       </ows:Constraint>
       <ows:Constraint name="ImplementsInheritance">
          <ows:NoValues/>
-         <ows:DefaultValue>FALSE</ows:DefaultValue>
+         <ows:DefaultValue>TRUE</ows:DefaultValue>
       </ows:Constraint>
       <ows:Constraint name="ImplementsRemoteResolve">
          <ows:NoValues/>
@@ -883,9 +1032,13 @@ Afterwards requests are generated for each unique resource in the FeatureCollect
          <ows:NoValues/>
          <ows:DefaultValue>FALSE</ows:DefaultValue>
       </ows:Constraint>
-      <ows:Constraint name="CountDefault">
+      <ows:Constraint name="AutomaticDataLocking">
          <ows:NoValues/>
-         <ows:DefaultValue>1000000</ows:DefaultValue>
+         <ows:DefaultValue>TRUE</ows:DefaultValue>
+      </ows:Constraint>
+      <ows:Constraint name="PreservesSiblingOrder">
+         <ows:NoValues/>
+         <ows:DefaultValue>TRUE</ows:DefaultValue>
       </ows:Constraint>
       <ows:Constraint name="ResolveLocalScope">
          <ows:NoValues/>
@@ -898,998 +1051,60 @@ Afterwards requests are generated for each unique resource in the FeatureCollect
          </ows:AllowedValues>
       </ows:Constraint>
    </ows:OperationsMetadata>
-   <FeatureTypeList>
-      <FeatureType>
-         <Name xmlns:tn="urn:x-inspire:specification:gmlas:CommonTransportElements:3.0">tn:AccessRestriction</Name>
-         <Title>tn:AccessRestriction</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
+   <wfs:FeatureTypeList>
+      <wfs:FeatureType xmlns:ci="http://www.interactive-instruments.de/namespaces/demo/cities/4.0/cities">
+         <wfs:Name>ci:City</wfs:Name>
+         <wfs:Title/>
+         <wfs:DefaultCRS>urn:ogc:def:crs:EPSG::4326</wfs:DefaultCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::25833</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::3034</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::3857</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::4258</wfs:OtherCRS>
          <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
+            <ows:LowerCorner>5 46</ows:LowerCorner>
+            <ows:UpperCorner>16 54</ows:UpperCorner>
          </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn="urn:x-inspire:specification:gmlas:CommonTransportElements:3.0">tn:ConditionOfFacility</Name>
-         <Title>tn:ConditionOfFacility</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
+      </wfs:FeatureType>
+      <wfs:FeatureType xmlns:ci="http://www.interactive-instruments.de/namespaces/demo/cities/4.0/cities">
+         <wfs:Name>ci:District</wfs:Name>
+         <wfs:Title/>
+         <wfs:DefaultCRS>urn:ogc:def:crs:EPSG::4326</wfs:DefaultCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::25833</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::3034</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::3857</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::4258</wfs:OtherCRS>
          <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
+            <ows:LowerCorner>5 46</ows:LowerCorner>
+            <ows:UpperCorner>16 54</ows:UpperCorner>
          </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn="urn:x-inspire:specification:gmlas:CommonTransportElements:3.0">tn:MaintenanceAuthority</Name>
-         <Title>tn:MaintenanceAuthority</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
+      </wfs:FeatureType>
+      <wfs:FeatureType xmlns:ci="http://www.interactive-instruments.de/namespaces/demo/cities/4.0/cities">
+         <wfs:Name>ci:River</wfs:Name>
+         <wfs:Title/>
+         <wfs:DefaultCRS>urn:ogc:def:crs:EPSG::4326</wfs:DefaultCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::25833</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::3034</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::3857</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::4258</wfs:OtherCRS>
          <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
+            <ows:LowerCorner>5 46</ows:LowerCorner>
+            <ows:UpperCorner>16 54</ows:UpperCorner>
          </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn="urn:x-inspire:specification:gmlas:CommonTransportElements:3.0">tn:MarkerPost</Name>
-         <Title>tn:MarkerPost</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
+      </wfs:FeatureType>
+      <wfs:FeatureType xmlns:ci="http://www.interactive-instruments.de/namespaces/demo/cities/4.0/cities">
+         <wfs:Name>ci:State</wfs:Name>
+         <wfs:Title/>
+         <wfs:DefaultCRS>urn:ogc:def:crs:EPSG::4326</wfs:DefaultCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::25833</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::3034</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::3857</wfs:OtherCRS>
+         <wfs:OtherCRS>urn:ogc:def:crs:EPSG::4258</wfs:OtherCRS>
          <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
+            <ows:LowerCorner>5 46</ows:LowerCorner>
+            <ows:UpperCorner>16 54</ows:UpperCorner>
          </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn="urn:x-inspire:specification:gmlas:CommonTransportElements:3.0">tn:OwnerAuthority</Name>
-         <Title>tn:OwnerAuthority</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn="urn:x-inspire:specification:gmlas:CommonTransportElements:3.0">tn:RestrictionForVehicles</Name>
-         <Title>tn:RestrictionForVehicles</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn="urn:x-inspire:specification:gmlas:CommonTransportElements:3.0">tn:TrafficFlowDirection</Name>
-         <Title>tn:TrafficFlowDirection</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn="urn:x-inspire:specification:gmlas:CommonTransportElements:3.0">tn:TransportNetwork</Name>
-         <Title>tn:TransportNetwork</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn="urn:x-inspire:specification:gmlas:CommonTransportElements:3.0">tn:VerticalPosition</Name>
-         <Title>tn:VerticalPosition</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:gn="urn:x-inspire:specification:gmlas:GeographicalNames:3.0">gn:NamedPlace</Name>
-         <Title>gn:NamedPlace</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-43.911558 0.000000</ows:LowerCorner>
-            <ows:UpperCorner>52.478522 80.264681</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:net="urn:x-inspire:specification:gmlas:Network:3.2">net:CrossReference</Name>
-         <Title>net:CrossReference</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:net="urn:x-inspire:specification:gmlas:Network:3.2">net:GradeSeparatedCrossing</Name>
-         <Title>net:GradeSeparatedCrossing</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:net="urn:x-inspire:specification:gmlas:Network:3.2">net:Network</Name>
-         <Title>net:Network</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:net="urn:x-inspire:specification:gmlas:Network:3.2">net:NetworkConnection</Name>
-         <Title>net:NetworkConnection</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn-ro="urn:x-inspire:specification:gmlas:RoadTransportNetwork:3.0">tn-ro:ERoad</Name>
-         <Title>tn-ro:ERoad</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn-ro="urn:x-inspire:specification:gmlas:RoadTransportNetwork:3.0">tn-ro:FormOfWay</Name>
-         <Title>tn-ro:FormOfWay</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn-ro="urn:x-inspire:specification:gmlas:RoadTransportNetwork:3.0">tn-ro:FunctionalRoadClass</Name>
-         <Title>tn-ro:FunctionalRoadClass</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn-ro="urn:x-inspire:specification:gmlas:RoadTransportNetwork:3.0">tn-ro:NumberOfLanes</Name>
-         <Title>tn-ro:NumberOfLanes</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn-ro="urn:x-inspire:specification:gmlas:RoadTransportNetwork:3.0">tn-ro:Road</Name>
-         <Title>tn-ro:Road</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn-ro="urn:x-inspire:specification:gmlas:RoadTransportNetwork:3.0">tn-ro:RoadArea</Name>
-         <Title>tn-ro:RoadArea</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn-ro="urn:x-inspire:specification:gmlas:RoadTransportNetwork:3.0">tn-ro:RoadLink</Name>
-         <Title>tn-ro:RoadLink</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-1637.616894 0.000191</ows:LowerCorner>
-            <ows:UpperCorner>66.690431 532.779103</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn-ro="urn:x-inspire:specification:gmlas:RoadTransportNetwork:3.0">tn-ro:RoadLinkSequence</Name>
-         <Title>tn-ro:RoadLinkSequence</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn-ro="urn:x-inspire:specification:gmlas:RoadTransportNetwork:3.0">tn-ro:RoadName</Name>
-         <Title>tn-ro:RoadName</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn-ro="urn:x-inspire:specification:gmlas:RoadTransportNetwork:3.0">tn-ro:RoadNode</Name>
-         <Title>tn-ro:RoadNode</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>10.617545 58.869961</ows:LowerCorner>
-            <ows:UpperCorner>12.015112 63.587193</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn-ro="urn:x-inspire:specification:gmlas:RoadTransportNetwork:3.0">tn-ro:RoadServiceArea</Name>
-         <Title>tn-ro:RoadServiceArea</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn-ro="urn:x-inspire:specification:gmlas:RoadTransportNetwork:3.0">tn-ro:RoadServiceType</Name>
-         <Title>tn-ro:RoadServiceType</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn-ro="urn:x-inspire:specification:gmlas:RoadTransportNetwork:3.0">tn-ro:RoadSurfaceCategory</Name>
-         <Title>tn-ro:RoadSurfaceCategory</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn-ro="urn:x-inspire:specification:gmlas:RoadTransportNetwork:3.0">tn-ro:RoadWidth</Name>
-         <Title>tn-ro:RoadWidth</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn-ro="urn:x-inspire:specification:gmlas:RoadTransportNetwork:3.0">tn-ro:SpeedLimit</Name>
-         <Title>tn-ro:SpeedLimit</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-      <FeatureType>
-         <Name xmlns:tn-ro="urn:x-inspire:specification:gmlas:RoadTransportNetwork:3.0">tn-ro:VehicleTrafficArea</Name>
-         <Title>tn-ro:VehicleTrafficArea</Title>
-         <DefaultCRS>urn:ogc:def:crs:EPSG::25833</DefaultCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4258</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3035</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3044</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3045</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3046</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3047</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3048</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::4326</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25829</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25830</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25831</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25832</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25834</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25835</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::25836</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32632</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32633</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32634</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::32635</OtherCRS>
-         <OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
-         <OutputFormats>
-            <Format>text/xml; subtype=gml/3.2.1</Format>
-            <Format>application/gml+xml; version=3.2</Format>
-         </OutputFormats>
-         <ows:WGS84BoundingBox>
-            <ows:LowerCorner>-180.000000 -90.000000</ows:LowerCorner>
-            <ows:UpperCorner>180.000000 90.000000</ows:UpperCorner>
-         </ows:WGS84BoundingBox>
-      </FeatureType>
-   </FeatureTypeList>
+      </wfs:FeatureType>
+   </wfs:FeatureTypeList>
    <fes:Filter_Capabilities>
       <fes:Conformance>
          <fes:Constraint name="ImplementsQuery">
@@ -1926,11 +1141,11 @@ Afterwards requests are generated for each unique resource in the FeatureCollect
          </fes:Constraint>
          <fes:Constraint name="ImplementsMinTemporalFilter">
             <ows:NoValues/>
-            <ows:DefaultValue>FALSE</ows:DefaultValue>
+            <ows:DefaultValue>TRUE</ows:DefaultValue>
          </fes:Constraint>
          <fes:Constraint name="ImplementsTemporalFilter">
             <ows:NoValues/>
-            <ows:DefaultValue>FALSE</ows:DefaultValue>
+            <ows:DefaultValue>TRUE</ows:DefaultValue>
          </fes:Constraint>
          <fes:Constraint name="ImplementsVersionNav">
             <ows:NoValues/>
@@ -1950,7 +1165,7 @@ Afterwards requests are generated for each unique resource in the FeatureCollect
          </fes:Constraint>
          <fes:Constraint name="ImplementsSchemaElementFunc">
             <ows:NoValues/>
-            <ows:DefaultValue>FALSE</ows:DefaultValue>
+            <ows:DefaultValue>TRUE</ows:DefaultValue>
          </fes:Constraint>
       </fes:Conformance>
       <fes:Id_Capabilities>
@@ -1972,30 +1187,19 @@ Afterwards requests are generated for each unique resource in the FeatureCollect
          </fes:ComparisonOperators>
       </fes:Scalar_Capabilities>
       <fes:Spatial_Capabilities>
-         <fes:GeometryOperands xmlns:gml32="http://www.opengis.net/gml">
+         <fes:GeometryOperands>
+            <fes:GeometryOperand name="gml:Point"/>
+            <fes:GeometryOperand name="gml:MultiPoint"/>
+            <fes:GeometryOperand name="gml:LineString"/>
+            <fes:GeometryOperand name="gml:Arc"/>
+            <fes:GeometryOperand name="gml:CubicSpline"/>
+            <fes:GeometryOperand name="gml:MultiLineString"/>
+            <fes:GeometryOperand name="gml:Curve"/>
+            <fes:GeometryOperand name="gml:MultiCurve"/>
+            <fes:GeometryOperand name="gml:Polygon"/>
+            <fes:GeometryOperand name="gml:MultiSurface"/>
             <fes:GeometryOperand name="gml:Box"/>
             <fes:GeometryOperand name="gml:Envelope"/>
-            <fes:GeometryOperand name="gml:Point"/>
-            <fes:GeometryOperand name="gml:LineString"/>
-            <fes:GeometryOperand name="gml:Curve"/>
-            <fes:GeometryOperand name="gml:Polygon"/>
-            <fes:GeometryOperand name="gml:Surface"/>
-            <fes:GeometryOperand name="gml:MultiPoint"/>
-            <fes:GeometryOperand name="gml:MultiLineString"/>
-            <fes:GeometryOperand name="gml:MultiCurve"/>
-            <fes:GeometryOperand name="gml:MultiPolygon"/>
-            <fes:GeometryOperand name="gml:MultiSurface"/>
-            <fes:GeometryOperand name="gml:CompositeCurve"/>
-            <fes:GeometryOperand name="gml:CompositeSurface"/>
-            <fes:GeometryOperand name="gml32:Envelope"/>
-            <fes:GeometryOperand name="gml32:Point"/>
-            <fes:GeometryOperand name="gml32:Curve"/>
-            <fes:GeometryOperand name="gml32:Surface"/>
-            <fes:GeometryOperand name="gml32:MultiPoint"/>
-            <fes:GeometryOperand name="gml32:MultiCurve"/>
-            <fes:GeometryOperand name="gml32:MultiSurface"/>
-            <fes:GeometryOperand name="gml32:CompositeCurve"/>
-            <fes:GeometryOperand name="gml32:CompositeSurface"/>
          </fes:GeometryOperands>
          <fes:SpatialOperators>
             <fes:SpatialOperator name="BBOX"/>
@@ -2011,221 +1215,87 @@ Afterwards requests are generated for each unique resource in the FeatureCollect
             <fes:SpatialOperator name="DWithin"/>
          </fes:SpatialOperators>
       </fes:Spatial_Capabilities>
+      <fes:Temporal_Capabilities>
+         <fes:TemporalOperands>
+            <fes:TemporalOperand name="gml:TimeInstant"/>
+            <fes:TemporalOperand name="gml:TimePeriod"/>
+         </fes:TemporalOperands>
+         <fes:TemporalOperators>
+            <fes:TemporalOperator name="During"/>
+         </fes:TemporalOperators>
+      </fes:Temporal_Capabilities>
       <fes:Functions>
-         <fes:Function name="Area">
-            <fes:Returns xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:double</fes:Returns>
+         <fes:Function name="modulo">
+            <fes:Returns>xsd:integer</fes:Returns>
             <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type>gml:_Geometry</fes:Type>
+               <fes:Argument name="dividend">
+                  <fes:Type>xsd:double</fes:Type>
+               </fes:Argument>
+               <fes:Argument name="divisor">
+                  <fes:Type>xsd:double</fes:Type>
                </fes:Argument>
             </fes:Arguments>
          </fes:Function>
-         <fes:Function name="Area">
-            <fes:Returns xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:double</fes:Returns>
+         <fes:Function name="mod">
+            <fes:Returns>xsd:integer</fes:Returns>
             <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type xmlns:gml32="http://www.opengis.net/gml/3.2">gml32:AbstractGeometry</fes:Type>
+               <fes:Argument name="dividend">
+                  <fes:Type>xsd:double</fes:Type>
+               </fes:Argument>
+               <fes:Argument name="divisor">
+                  <fes:Type>xsd:double</fes:Type>
                </fes:Argument>
             </fes:Arguments>
          </fes:Function>
-         <fes:Function name="Centroid">
-            <fes:Returns>gml:Point</fes:Returns>
+         <fes:Function name="abs">
+            <fes:Returns>xsd:integer</fes:Returns>
             <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type>gml:_Geometry</fes:Type>
+               <fes:Argument name="value">
+                  <fes:Type>xsd:double</fes:Type>
                </fes:Argument>
             </fes:Arguments>
          </fes:Function>
-         <fes:Function name="Centroid">
-            <fes:Returns xmlns:gml32="http://www.opengis.net/gml/3.2">gml32:Point</fes:Returns>
+         <fes:Function name="concatenate">
+            <fes:Returns>xsd:string</fes:Returns>
             <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type xmlns:gml32="http://www.opengis.net/gml/3.2">gml32:AbstractGeometry</fes:Type>
+               <fes:Argument name="value1">
+                  <fes:Type>xsd:string</fes:Type>
+               </fes:Argument>
+               <fes:Argument name="value2">
+                  <fes:Type>xsd:string</fes:Type>
                </fes:Argument>
             </fes:Arguments>
          </fes:Function>
-         <fes:Function name="ExtraProp">
-            <fes:Returns xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:anyType</fes:Returns>
+         <fes:Function name="geodim">
+            <fes:Returns>xsd:integer</fes:Returns>
             <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:string</fes:Type>
+               <fes:Argument name="value">
+                  <fes:Type>gml:AbstractGeometryType</fes:Type>
                </fes:Argument>
             </fes:Arguments>
          </fes:Function>
-         <fes:Function name="GeometryFromWKT">
-            <fes:Returns>gml:_Geometry</fes:Returns>
+         <fes:Function name="geoArea">
+            <fes:Returns>xsd:integer</fes:Returns>
             <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:string</fes:Type>
-               </fes:Argument>
-               <fes:Argument name="arg2">
-                  <fes:Type xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:string</fes:Type>
+               <fes:Argument name="value">
+                  <fes:Type>gml:AbstractGeometryType</fes:Type>
                </fes:Argument>
             </fes:Arguments>
          </fes:Function>
-         <fes:Function name="GeometryFromWKT">
-            <fes:Returns xmlns:gml32="http://www.opengis.net/gml/3.2">gml32:AbstractGeometry</fes:Returns>
+         <fes:Function name="geoLength">
+            <fes:Returns>xsd:integer</fes:Returns>
             <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:string</fes:Type>
-               </fes:Argument>
-               <fes:Argument name="arg2">
-                  <fes:Type xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:string</fes:Type>
-               </fes:Argument>
-            </fes:Arguments>
-         </fes:Function>
-         <fes:Function name="GetCurrentScale">
-            <fes:Returns xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:double</fes:Returns>
-         </fes:Function>
-         <fes:Function name="IDiv">
-            <fes:Returns xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:integer</fes:Returns>
-            <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:integer</fes:Type>
-               </fes:Argument>
-               <fes:Argument name="arg2">
-                  <fes:Type xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:integer</fes:Type>
-               </fes:Argument>
-            </fes:Arguments>
-         </fes:Function>
-         <fes:Function name="IMod">
-            <fes:Returns xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:integer</fes:Returns>
-            <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:integer</fes:Type>
-               </fes:Argument>
-               <fes:Argument name="arg2">
-                  <fes:Type xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:integer</fes:Type>
-               </fes:Argument>
-            </fes:Arguments>
-         </fes:Function>
-         <fes:Function name="InteriorPoint">
-            <fes:Returns>gml:Point</fes:Returns>
-            <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type>gml:_Geometry</fes:Type>
-               </fes:Argument>
-            </fes:Arguments>
-         </fes:Function>
-         <fes:Function name="InteriorPoint">
-            <fes:Returns xmlns:gml32="http://www.opengis.net/gml/3.2">gml32:Point</fes:Returns>
-            <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type xmlns:gml32="http://www.opengis.net/gml/3.2">gml32:AbstractGeometry</fes:Type>
-               </fes:Argument>
-            </fes:Arguments>
-         </fes:Function>
-         <fes:Function name="IsCurve">
-            <fes:Returns xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:boolean</fes:Returns>
-            <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type>gml:_Geometry</fes:Type>
-               </fes:Argument>
-            </fes:Arguments>
-         </fes:Function>
-         <fes:Function name="IsCurve">
-            <fes:Returns xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:boolean</fes:Returns>
-            <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type xmlns:gml32="http://www.opengis.net/gml/3.2">gml32:AbstractGeometry</fes:Type>
-               </fes:Argument>
-            </fes:Arguments>
-         </fes:Function>
-         <fes:Function name="IsPoint">
-            <fes:Returns xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:boolean</fes:Returns>
-            <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type>gml:_Geometry</fes:Type>
-               </fes:Argument>
-            </fes:Arguments>
-         </fes:Function>
-         <fes:Function name="IsPoint">
-            <fes:Returns xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:boolean</fes:Returns>
-            <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type xmlns:gml32="http://www.opengis.net/gml/3.2">gml32:AbstractGeometry</fes:Type>
-               </fes:Argument>
-            </fes:Arguments>
-         </fes:Function>
-         <fes:Function name="IsSurface">
-            <fes:Returns xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:boolean</fes:Returns>
-            <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type>gml:_Geometry</fes:Type>
-               </fes:Argument>
-            </fes:Arguments>
-         </fes:Function>
-         <fes:Function name="IsSurface">
-            <fes:Returns xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:boolean</fes:Returns>
-            <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type xmlns:gml32="http://www.opengis.net/gml/3.2">gml32:AbstractGeometry</fes:Type>
-               </fes:Argument>
-            </fes:Arguments>
-         </fes:Function>
-         <fes:Function name="Length">
-            <fes:Returns xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:double</fes:Returns>
-            <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type>gml:_Geometry</fes:Type>
-               </fes:Argument>
-            </fes:Arguments>
-         </fes:Function>
-         <fes:Function name="Length">
-            <fes:Returns xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:double</fes:Returns>
-            <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type xmlns:gml32="http://www.opengis.net/gml/3.2">gml32:AbstractGeometry</fes:Type>
-               </fes:Argument>
-            </fes:Arguments>
-         </fes:Function>
-         <fes:Function name="Lower">
-            <fes:Returns xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:integer</fes:Returns>
-            <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:double</fes:Type>
-               </fes:Argument>
-            </fes:Arguments>
-         </fes:Function>
-         <fes:Function name="MoveGeometry">
-            <fes:Returns xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:double</fes:Returns>
-            <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type>gml:_Geometry</fes:Type>
-               </fes:Argument>
-            </fes:Arguments>
-         </fes:Function>
-         <fes:Function name="MoveGeometry">
-            <fes:Returns xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:double</fes:Returns>
-            <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type xmlns:gml32="http://www.opengis.net/gml/3.2">gml32:AbstractGeometry</fes:Type>
-               </fes:Argument>
-            </fes:Arguments>
-         </fes:Function>
-         <fes:Function name="Upper">
-            <fes:Returns xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:integer</fes:Returns>
-            <fes:Arguments>
-               <fes:Argument name="arg1">
-                  <fes:Type xmlns:xsd="http://www.w3.org/2001/XMLSchema">xsd:double</fes:Type>
+               <fes:Argument name="value">
+                  <fes:Type>gml:AbstractGeometryType</fes:Type>
                </fes:Argument>
             </fes:Arguments>
          </fes:Function>
       </fes:Functions>
    </fes:Filter_Capabilities>
-</WFS_Capabilities>]]></con:value></con:property><con:property><con:name>service</con:name><con:value>wfs</con:value></con:property><con:property><con:name>version</con:name><con:value>2.0.0</con:value></con:property><con:property><con:name>qaf.ShortDescription</con:name></con:property><con:property><con:name>qaf.Author</con:name></con:property><con:property><con:name>qaf.CreationDate</con:name></con:property><con:property><con:name>qaf.Version</con:name></con:property><con:property><con:name>qaf.AssociatedRequirements</con:name></con:property><con:property><con:name>qaf.ExpectedResults</con:name></con:property><con:property><con:name>qaf.Status</con:name></con:property><con:property><con:name>qaf.LastUpdateDate</con:name></con:property></con:properties><con:returnProperties><con:entry>capabilities</con:entry><con:entry>service</con:entry><con:entry>version</con:entry></con:returnProperties><con:runMode>PARALLELL</con:runMode></con:config></con:testStep><con:testStep type="properties" name="Transfer_Properties" id="2d8a5731-5c42-4943-9fed-e0487df9ff40"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>FT.NAME</con:name><con:value>tn-ro:VehicleTrafficArea</con:value></con:property><con:property><con:name>FT.PREFIX</con:name><con:value>tn-ro</con:value></con:property><con:property><con:name>FT.NAMESPACE</con:name><con:value>urn:x-inspire:specification:gmlas:RoadTransportNetwork:3.0</con:value></con:property><con:property><con:name>FT.NAMESPACES</con:name><con:value> xmlns:ns5='urn:x-inspire:specification:gmlas:CommonTransportElements:3.0' xmlns:gmd='http://www.isotc211.org/2005/gmd' xmlns:tn-ro='urn:x-inspire:specification:gmlas:RoadTransportNetwork:3.0' xmlns:gco='http://www.isotc211.org/2005/gco' xmlns:ns3='urn:x-inspire:specification:gmlas:Network:3.2' xmlns:gsr='http://www.isotc211.org/2005/gsr' xmlns:gts='http://www.isotc211.org/2005/gts' xmlns:gss='http://www.isotc211.org/2005/gss' xmlns:gml_3.2='http://www.opengis.net/gml/3.2' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ns4='urn:x-inspire:specification:gmlas:GeographicalNames:3.0' xmlns:ns1='urn:x-inspire:specification:gmlas:BaseTypes:3.2' </con:value></con:property><con:property><con:name>FT.NAMESPACES.X</con:name><con:value>declare namespace ns5='urn:x-inspire:specification:gmlas:CommonTransportElements:3.0';
-declare namespace gmd='http://www.isotc211.org/2005/gmd';
-declare namespace tn-ro='urn:x-inspire:specification:gmlas:RoadTransportNetwork:3.0';
-declare namespace gco='http://www.isotc211.org/2005/gco';
-declare namespace ns3='urn:x-inspire:specification:gmlas:Network:3.2';
-declare namespace gsr='http://www.isotc211.org/2005/gsr';
-declare namespace gts='http://www.isotc211.org/2005/gts';
-declare namespace gss='http://www.isotc211.org/2005/gss';
-declare namespace gml_3.2='http://www.opengis.net/gml/3.2';
+</wfs:WFS_Capabilities>]]></con:value></con:property><con:property><con:name>service</con:name><con:value>wfs</con:value></con:property><con:property><con:name>version</con:name><con:value>2.0.0</con:value></con:property><con:property><con:name>qaf.ShortDescription</con:name></con:property><con:property><con:name>qaf.Author</con:name></con:property><con:property><con:name>qaf.CreationDate</con:name></con:property><con:property><con:name>qaf.Version</con:name></con:property><con:property><con:name>qaf.AssociatedRequirements</con:name></con:property><con:property><con:name>qaf.ExpectedResults</con:name></con:property><con:property><con:name>qaf.Status</con:name></con:property><con:property><con:name>qaf.LastUpdateDate</con:name></con:property></con:properties><con:returnProperties><con:entry>capabilities</con:entry><con:entry>service</con:entry><con:entry>version</con:entry></con:returnProperties><con:runMode>PARALLELL</con:runMode></con:config></con:testStep><con:testStep type="properties" name="Transfer_Properties" id="2d8a5731-5c42-4943-9fed-e0487df9ff40"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>FT.NAME</con:name><con:value>ci:State</con:value></con:property><con:property><con:name>FT.PREFIX</con:name><con:value>ci</con:value></con:property><con:property><con:name>FT.NAMESPACE</con:name><con:value>http://www.interactive-instruments.de/namespaces/demo/cities/4.0/cities</con:value></con:property><con:property><con:name>FT.NAMESPACES</con:name><con:value> xmlns:ci='http://www.interactive-instruments.de/namespaces/demo/cities/4.0/cities' xmlns:gml='http://www.opengis.net/gml' xmlns:xlink='http://www.w3.org/1999/xlink' </con:value></con:property><con:property><con:name>FT.NAMESPACES.X</con:name><con:value>declare namespace ci='http://www.interactive-instruments.de/namespaces/demo/cities/4.0/cities';
+declare namespace gml='http://www.opengis.net/gml';
 declare namespace xlink='http://www.w3.org/1999/xlink';
-declare namespace ns4='urn:x-inspire:specification:gmlas:GeographicalNames:3.0';
-declare namespace ns1='urn:x-inspire:specification:gmlas:BaseTypes:3.2';
-</con:value></con:property><con:property><con:name>FT.NAMESPACES.GET</con:name><con:value> xmlns(ns5=urn:x-inspire:specification:gmlas:CommonTransportElements:3.0),xmlns(gmd=http://www.isotc211.org/2005/gmd),xmlns(tn-ro=urn:x-inspire:specification:gmlas:RoadTransportNetwork:3.0),xmlns(gco=http://www.isotc211.org/2005/gco),xmlns(ns3=urn:x-inspire:specification:gmlas:Network:3.2),xmlns(gsr=http://www.isotc211.org/2005/gsr),xmlns(gts=http://www.isotc211.org/2005/gts),xmlns(gss=http://www.isotc211.org/2005/gss),xmlns(gml_3.2=http://www.opengis.net/gml/3.2),xmlns(xlink=http://www.w3.org/1999/xlink),xmlns(ns4=urn:x-inspire:specification:gmlas:GeographicalNames:3.0),xmlns(ns1=urn:x-inspire:specification:gmlas:BaseTypes:3.2)</con:value></con:property><con:property><con:name>FT.NAMESPACES.GET.WFS2</con:name><con:value> xmlns(ns5,urn:x-inspire:specification:gmlas:CommonTransportElements:3.0),xmlns(gmd,http://www.isotc211.org/2005/gmd),xmlns(tn-ro,urn:x-inspire:specification:gmlas:RoadTransportNetwork:3.0),xmlns(gco,http://www.isotc211.org/2005/gco),xmlns(ns3,urn:x-inspire:specification:gmlas:Network:3.2),xmlns(gsr,http://www.isotc211.org/2005/gsr),xmlns(gts,http://www.isotc211.org/2005/gts),xmlns(gss,http://www.isotc211.org/2005/gss),xmlns(gml_3.2,http://www.opengis.net/gml/3.2),xmlns(xlink,http://www.w3.org/1999/xlink),xmlns(ns4,urn:x-inspire:specification:gmlas:GeographicalNames:3.0),xmlns(ns1,urn:x-inspire:specification:gmlas:BaseTypes:3.2)</con:value></con:property><con:property><con:name>FT.OUTPUTFORMAT</con:name><con:value>text/xml; subtype=gml/3.2.1</con:value></con:property></con:properties></con:config></con:testStep><con:testStep name="Request Features POST TMPL" type="httprequest" disabled="true" id="bafce580-fca2-44a6-84d5-9adbbb8c9799">
+</con:value></con:property><con:property><con:name>FT.NAMESPACES.GET</con:name><con:value> xmlns(ci=http://www.interactive-instruments.de/namespaces/demo/cities/4.0/cities),xmlns(gml=http://www.opengis.net/gml),xmlns(xlink=http://www.w3.org/1999/xlink)</con:value></con:property><con:property><con:name>FT.NAMESPACES.GET.WFS2</con:name><con:value> xmlns(ci,http://www.interactive-instruments.de/namespaces/demo/cities/4.0/cities),xmlns(gml,http://www.opengis.net/gml),xmlns(xlink,http://www.w3.org/1999/xlink)</con:value></con:property><con:property><con:name>FT.OUTPUTFORMAT</con:name><con:value>application/gml+xml; version=2.1</con:value></con:property></con:properties></con:config></con:testStep><con:testStep name="Request Features POST TMPL" type="httprequest" disabled="true" id="bafce580-fca2-44a6-84d5-9adbbb8c9799">
         <con:settings/>
         <con:config method="POST" name="Request Features POST TMPL" timeout="0" xsi:type="con:HttpRequest" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:description>GetFeature request</con:description><con:settings>
@@ -2233,7 +1303,7 @@ declare namespace ns1='urn:x-inspire:specification:gmlas:BaseTypes:3.2';
           </con:settings>
           <con:encoding>UTF-8</con:encoding>
           <con:endpoint>${#Project#endpt.GetFeature}</con:endpoint>
-          <con:request>&lt;wfs:GetFeature version="2.0.0" outputFormat="${Transfer_Properties#FT.OUTPUTFORMAT}" count="${#Project#maxFeaturesInCollection}" xmlns:wfs="http://www.opengis.net/wfs/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:request>&lt;wfs:GetFeature service="WFS" version="2.0.0" outputFormat="${Transfer_Properties#FT.OUTPUTFORMAT}" count="${#Project#maxFeaturesInCollection}" xmlns:wfs="http://www.opengis.net/wfs/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
    &lt;wfs:Query typeNames="${Transfer_Properties#FT.NAME}" ${Transfer_Properties#FT.NAMESPACES}/>
 &lt;/wfs:GetFeature></con:request>
           <con:assertion type="XPath Match" name="Root element is FeatureCollection" id="96a027de-f87c-4326-924e-b3e4ab2e4666"><con:configuration><path>exists(/*:FeatureCollection)</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XQuery Match" name="Non-URL references start with '#' and the ID exist in the feature collection" id="e20d744c-308c-4707-8b7d-f951b9b3354d"><con:configuration><path>&lt;result>
@@ -2362,4 +1432,4 @@ for (reference in references) {
             
           </con:parameters>
         </con:config>
-      </con:testStep><con:properties><con:property><con:name>qaf.ShortDescription</con:name><con:value/></con:property><con:property><con:name>qaf.Author</con:name><con:value>Jon Herrmann</con:value></con:property><con:property><con:name>qaf.CreationDate</con:name><con:value>2014-01-13T12:24:44.142+01:00</con:value></con:property><con:property><con:name>qaf.Version</con:name><con:value>1.0.0</con:value></con:property><con:property><con:name>qaf.AssociatedRequirements</con:name><con:value>II-REQ##REQ-01</con:value></con:property><con:property><con:name>qaf.ExpectedResults</con:name><con:value/></con:property><con:property><con:name>qaf.Status</con:name><con:value>IMPLEMENTED</con:value></con:property><con:property><con:name>qaf.LastUpdateDate</con:name><con:value>2014-01-27T14:10:42.874+01:00</con:value></con:property><con:property><con:name>etf.technicalStep</con:name><con:value>true</con:value></con:property></con:properties><con:reportParameters/></con:testCase><con:properties/><con:reportParameters/></con:testSuite><con:requirements/><con:properties><con:property><con:name>serviceEndpoint</con:name><con:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">http://services.cuzk.cz/wfs/inspire-cp-wfs.asp</con:value></con:property><con:property><con:name>endpt.DescribeFeatureType</con:name><con:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">http://services.cuzk.cz/wfs/inspire-cp-wfs.asp?</con:value></con:property><con:property><con:name>endpt.GetFeature</con:name><con:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">http://services.cuzk.cz/wfs/inspire-cp-wfs.asp?</con:value></con:property><con:property><con:name>endpt.GetMap</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>endpt.GetFeatureInfo</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>testIntensive</con:name><con:value>true</con:value></con:property><con:property><con:name>authUser</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>authPwd</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>authMethod</con:name><con:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">basic</con:value></con:property><con:property><con:name>etf.ignore.properties</con:name><con:value>authUser, authPwd, authMethod, testIntensive, endpt.DescribeFeatureType, endpt.GetFeature, endpt.GetMap, endpt.GetFeatureInfo</con:value></con:property><con:property><con:name>maxFeaturesInCollection</con:name><con:value>50</con:value></con:property></con:properties><con:wssContainer/><con:databaseConnectionContainer/><con:reporting><con:xmlTemplates/><con:parameters/></con:reporting><con:beforeRunScript/><con:sensitiveInformation/></con:soapui-project>
+      </con:testStep><con:properties><con:property><con:name>qaf.ShortDescription</con:name><con:value/></con:property><con:property><con:name>qaf.Author</con:name><con:value>Jon Herrmann</con:value></con:property><con:property><con:name>qaf.CreationDate</con:name><con:value>2014-01-13T12:24:44.142+01:00</con:value></con:property><con:property><con:name>qaf.Version</con:name><con:value>1.0.0</con:value></con:property><con:property><con:name>qaf.AssociatedRequirements</con:name><con:value>II-REQ##REQ-01</con:value></con:property><con:property><con:name>qaf.ExpectedResults</con:name><con:value/></con:property><con:property><con:name>qaf.Status</con:name><con:value>IMPLEMENTED</con:value></con:property><con:property><con:name>qaf.LastUpdateDate</con:name><con:value>2014-01-27T14:10:42.874+01:00</con:value></con:property><con:property><con:name>etf.technicalStep</con:name><con:value>true</con:value></con:property></con:properties><con:reportParameters/></con:testCase><con:properties/><con:reportParameters/></con:testSuite><con:requirements/><con:properties><con:property><con:name>serviceEndpoint</con:name><con:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs?request=GetCapabilities&amp;service=wfs</con:value></con:property><con:property><con:name>endpt.DescribeFeatureType</con:name><con:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs?</con:value></con:property><con:property><con:name>endpt.GetFeature</con:name><con:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">http://services.interactive-instruments.de/cite2013wfs/simpledemo/cgi-bin/cities-postgresql/wfs?</con:value></con:property><con:property><con:name>endpt.GetMap</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>endpt.GetFeatureInfo</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>testIntensive</con:name><con:value>true</con:value></con:property><con:property><con:name>authUser</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>authPwd</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>authMethod</con:name><con:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">basic</con:value></con:property><con:property><con:name>etf.ignore.properties</con:name><con:value>authUser, authPwd, authMethod, testIntensive, endpt.DescribeFeatureType, endpt.GetFeature, endpt.GetMap, endpt.GetFeatureInfo</con:value></con:property><con:property><con:name>maxFeaturesInCollection</con:name><con:value>50</con:value></con:property></con:properties><con:wssContainer/><con:databaseConnectionContainer/><con:reporting><con:xmlTemplates/><con:parameters/></con:reporting><con:beforeRunScript/><con:sensitiveInformation/></con:soapui-project>
