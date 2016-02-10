@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-workspace name="Test projects for ELF" projectRoot="${workspaceDir}" soapui-version="4.6.4" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings/>
+  <con:project name="WFS 2.0.0 (additional ELF tests)">src/main/resources/WFS-2_Feature_reference_tests-soapui-project.xml</con:project>
+</con:soapui-workspace>
