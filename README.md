@@ -11,8 +11,8 @@ As part of the work in the European Location Framework project [(ELF project web
 
 This repository contains the code of any ELF-specific test projects.
 
-## Import projects in SoapUI workspace
-(to be added)
+## SoapUI workspace
+To open the workspace with all test projects click on _File_ -> _Switch Workspace_ in the GUI and select the file _Test_projects_for_ELF-soapui-workspace.xml_.
 
 ## Execute tests in soapUI
 The tests import additional libraries that are required to run the tests in SoapUI. Download the [required libraries](https://services.interactive-instruments.de/etfdev-af/etf-public-releases/de/interactive-instruments/etf/etf-owsgtl-1.3.2.zip). If you are asked for a login use: etf-public-releases/etf-public-releases. Afterwards copy the content of the zip to the bin/ext sub folder of your SoapUI installation directory.
